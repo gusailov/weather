@@ -8,20 +8,16 @@ console.log(currently.summary);
 
 function CurrentlyCard() {
   return (
-    <div>
+    <div className="container">
       <div className="card-deck">
         {
-          <div
-            className="card"
-            style={{
-              width: "18" + "rem",
-              height: "40px",
-              paddingLeft: "16px",
-              marginTop: "2px",
-              marginBottom: "500px",
-            }}
-          >
-            <div className="card-img-top">
+          <div className="card">
+            <div
+              style={{
+                width: "18rem",
+              }}
+              className="card-img-top"
+            >
               <Skycons color="black" icon={iconName} autoplay={true} />
             </div>
             <div className="card-body">
