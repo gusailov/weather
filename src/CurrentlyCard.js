@@ -9,26 +9,27 @@ console.log(currently.summary);
 function CurrentlyCard() {
   return (
     <div className="container">
-      <div className="card-deck">
-        {
+      <div className="row">
+        <div className="col s12 m6">
           <div className="card">
-            <div
-              style={{
-                width: "18rem",
-              }}
-              className="card-img-top"
-            >
+            <div className="card-image">
               <Skycons color="black" icon={iconName} autoplay={true} />
+              <span className="card-title blue-text text-darken-2">
+                {currently.summary}
+              </span>
+              <div className="btn-floating halfway-fab waves-effect waves-light red">
+                <i className="material-icons">add</i>
+              </div>
             </div>
-            <div className="card-body">
-              <h5 className="card-title">{currently.summary}</h5>
-              <p className="card-text"></p>
-            </div>
-            <div className="card-footer">
-              <small className="text-muted">Last updated 3 mins ago</small>
+            <div className="card-content">
+              <p>
+                I am a very simple card. I am good at containing small bits of
+                information. I am convenient because I require little markup to
+                use effectively.
+              </p>
             </div>
           </div>
-        }
+        </div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 //import "bootstrap/dist/css/bootstrap.min.css";
 //import "semantic-ui-css/semantic.min.css";
 import "materialize-css";
+import "materialize-css/dist/css/materialize.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
