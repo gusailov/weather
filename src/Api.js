@@ -38,7 +38,7 @@ function Api() {
       method: "GET",
       headers: {
         "x-rapidapi-host": "dark-sky.p.rapidapi.com",
-        "x-rapidapi-key": "2d8bcfc378mshd0a8c0076754a4dp18578ajsnbf56719ff2ce",
+        "x-rapidapi-key": "ENTER_KEY",
       },
     })
       .then((res) => res.json())
