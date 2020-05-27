@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import forecast from "./forecast.json";
 import Skycons from "react-skycons";
-import dateFormat from "./serviceWorker";
+import { dateFormat } from "./utils";
 
-const iconName = forecast.currently.icon.toUpperCase().replace(/-/gi, "_");
+const currentlyIconName = forecast.currently.icon
+  .toUpperCase()
+  .replace(/-/gi, "_");
 const currently = forecast.currently;
 const date = dateFormat(currently.time);
 
@@ -15,7 +17,7 @@ function CurrentlyCard() {
           <div className="card">
             <span className="card-title blue-text text-darken-2">{date}</span>
             <div className="card-image">
-              <Skycons color="black" icon={iconName} autoplay={true} />
+              <Skycons color="black" icon={currentlyIconName} autoplay={true} />
 
               <span className="card-title blue-text text-darken-2">
                 {currently.summary}
