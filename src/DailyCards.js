@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import forecast from "./forecast.json";
-import Skycons from "react-skycons";
 import { dateFormat, dateFormatHourly } from "./utils";
 import { Carousel } from "react-materialize";
+import sprite from './icons/sprite.svg'
 dateFormatHourly();
 
 //const iconName = forecast.daily.icon.toUpperCase().replace(/-/gi, "_");
@@ -33,12 +33,10 @@ function DailyCards() {
                 <div className="col">
                   <div className="card">
                     <div className="card-image">
-                      <Skycons
-                        className="responsive-img"
-                        color="black"
-                        icon={item.icon.toUpperCase().replace(/-/gi, "_")}
-                        autoplay={true}
-                      />
+                    <svg className="card-image">
+	<use xlinkHref={sprite+"#"+item.icon}></use>
+</svg> 
+                      
                       <span className="card-title black-text">
                         <p>{Math.round(item.temperatureHigh) + "℃"}</p>
                       </span>

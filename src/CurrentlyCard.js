@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import forecast from "./forecast.json";
-import Skycons from "react-skycons";
 import { dateFormat } from "./utils";
+import sprite from './icons/sprite.svg'
 
-const currentlyIconName = forecast.currently.icon
-  .toUpperCase()
-  .replace(/-/gi, "_");
+
+const currentlyIconName = forecast.currently.icon;
+
 const currently = forecast.currently;
 const date = dateFormat(currently.time);
 
 function CurrentlyCard() {
-  return (
-    <div className="container">
+      return (
+        <div className="container">
+      
       <div className="row">
         <div className="col s12 m6">
           <div className="card">
             <span className="card-title blue-text text-darken-2">{date}</span>
             <div className="card-image">
-              <Skycons color="black" icon={currentlyIconName} autoplay={true} />
-
+            <svg className="card-image">
+	<use xlinkHref={sprite+"#"+currentlyIconName}></use>
+</svg>     
               <span className="card-title blue-text text-darken-2">
                 {currently.summary}
               </span>
