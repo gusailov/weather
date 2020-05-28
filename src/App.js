@@ -8,7 +8,7 @@ import DailyCards from "./DailyCards";
 
 function App() {
   return (
-    <div>
+    <div >
       
       <CurrentlyCard></CurrentlyCard>
       <DailyCards></DailyCards>

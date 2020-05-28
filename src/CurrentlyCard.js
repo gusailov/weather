@@ -13,7 +13,7 @@ function CurrentlyCard() {
       return (
         <div className="container">
       
-      <div className="row">
+      
         <div className="col s12 m6">
           <div className="card">
             <span className="card-title blue-text text-darken-2">{date}</span>
@@ -37,7 +37,7 @@ function CurrentlyCard() {
             </div>
           </div>
         </div>
-      </div>
+      
     </div>
   );
 }

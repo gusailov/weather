@@ -12,7 +12,7 @@ const daily = forecast.daily.data;
 
 function DailyCards() {
   return (
-    <div>
+    <div className="container">
       <ul>
         {" "}
         <Carousel
@@ -30,7 +30,7 @@ function DailyCards() {
           {daily.map((item) => (
             <li key={item.time}>
               <div className="row ">
-                <div className="col">
+                <div className="col s2">
                   <div className="card">
                     <div className="card-image">
                     <svg className="card-image">
