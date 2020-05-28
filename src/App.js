@@ -2,14 +2,9 @@ import React from "react";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 
-
-
-
-
 function App() {
   return (
-    <div >
-      
+    <div>
       <CurrentlyCard></CurrentlyCard>
       <DailyCards></DailyCards>
     </div>
