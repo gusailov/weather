@@ -23,11 +23,8 @@ function CurrentlyCard() {
               <div className="card-title blue-text text-darken-2 center-align col">
                 {currently.summary}
               </div>
-              
-            </div>
-            
-              
-              
+                          </div>
+             
             <div className="card-content col s12">
               <div className="col s2">
                 {'WindSpeed -'+ Math.round(currently.windSpeed) + 'm/s'}
@@ -35,6 +32,7 @@ function CurrentlyCard() {
               <div className="col s2">
                 {'Feels like -'+ Math.round(currently.apparentTemperature)}<span>&deg;C</span>
               </div>
+              <div className="card-title activator grey-text text-darken-4 col s2"><i className="material-icons right">more_vert</i></div>
               <div className="col s2">
               <div className="btn-floating waves-effect waves-light red">
                 <i className="material-icons">add</i>
