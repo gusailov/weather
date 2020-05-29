@@ -14,10 +14,15 @@ const daily = forecast.daily.data;
 
 function DailyCards() {
   return (
-    <div className="container">
-      <Carousel className="container" indicators={false} wrap={false}>
+    <div className="container ">
+      <Carousel
+        className="container card"
+        indicators={false}
+        wrap={true}
+        interval={null}
+      >
         {daily.map((item) => (
-          <Carousel.Item key={item.time} className="card">
+          <Carousel.Item key={item.time} className="">
             <div className="col-sm">
               <div className="card-body mx-auto">
                 <svg className="d-block w-100">
