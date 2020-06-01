@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 //import "semantic-ui-css/semantic.min.css";
 //import "materialize-css";
 //import "materialize-css/dist/css/materialize.min.css";
