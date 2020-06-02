@@ -1,11 +1,12 @@
 import React from "react";
-import forecast from "../forecast.json";
 import { dateFormat } from "../utils";
 import sprite from "./icons/sprite.svg";
 import Slider from "react-slick";
 import {SampleNextArrow,SamplePrevArrow} from "./Arrows"
 
-const daily = forecast.daily.data;
+function DailyCards(props) {
+  const {forecast} = props
+  const daily = forecast.daily.data;
 
 const settings = {
   dots: true,
@@ -16,8 +17,6 @@ const settings = {
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
 };
-
-function DailyCards() {
   return (
     <div className="container mb-5 mt-5">
       <Slider {...settings}>

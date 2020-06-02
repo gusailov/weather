@@ -5,6 +5,7 @@ function Api() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [position, setPosition] = useState([]);
+  
 
   useEffect(() => {
     var options = {
@@ -30,15 +31,15 @@ function Api() {
   }, []);
 
   useEffect(() => {
-    console.log(position.latitude);
-    console.log(position.longitude);
+    //console.log(position.latitude);
+    //console.log(position.longitude);
     const ltd = position.latitude;
     const lng = position.longitude;
     fetch(`https://dark-sky.p.rapidapi.com/${ltd},${lng}?lang=en&units=auto`, {
       method: "GET",
       headers: {
         "x-rapidapi-host": "dark-sky.p.rapidapi.com",
-        "x-rapidapi-key": "ENTER_KEY",
+        "x-rapidapi-key": process.env.REACT_APP_DARK_SKY_API_KEY ,
       },
     })
       .then((res) => res.json())
@@ -53,8 +54,8 @@ function Api() {
         }
       );
   }, [position]);
-  console.log(items);
-  return <div className="App"></div>;
+  //console.log(items);
+  return ({items:items,ltd:position.latitude,lng:position.longitude});
 }
 
 export default Api;

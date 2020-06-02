@@ -1,15 +1,14 @@
 import React from "react";
-import forecast from "../forecast.json";
 import { dateFormat } from "../utils";
 import sprite from "./icons/sprite.svg";
 
-const currentlyIconName = forecast.currently.icon;
-const currently = forecast.currently;
-const date = dateFormat(currently.time);
-
-function CurrentlyCard() {
+function CurrentlyCard(props) {
+  const {forecast} = props
+  const currentlyIconName = forecast.currently.icon;
+  const currently = forecast.currently;
+  const date = dateFormat(currently.time);
   return (
-    <div className="container mb-5 mt-5">
+        <div className="container mb-5 mt-5">
       <div className="card">
         <div className="">
           <div className="">

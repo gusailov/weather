@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import HourlyCards from "./HourlyCards";
+import forecast from "../forecast.json";
+import Api from "./Api"
+
+
+
 
 function App() {
-  return (
+ const forecast2 = Api().items
+  
+  console.log(forecast2);
+  
+    return (
     <div>
-      <CurrentlyCard></CurrentlyCard>
-      <DailyCards></DailyCards>
-      <HourlyCards></HourlyCards>
+      <CurrentlyCard forecast={forecast}></CurrentlyCard>
+      <DailyCards forecast={forecast}></DailyCards>
+      <HourlyCards forecast={forecast}></HourlyCards>
     </div>
   );
 }

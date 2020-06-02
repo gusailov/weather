@@ -1,13 +1,14 @@
 import React from "react";
-import forecast from "../forecast.json";
 import { dateFormatHourly } from "../utils";
 import sprite from "./icons/sprite.svg";
 import Slider from "react-slick";
 import {SampleNextArrow,SamplePrevArrow} from "./Arrows"
 
-const hourly = forecast.hourly.data;
-console.log(hourly);
 
+
+function HourlyCards(props) {
+  const {forecast} = props
+  const hourly = forecast.hourly.data;
 
 const settings = {
   dots: false,
@@ -18,8 +19,6 @@ const settings = {
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
 };
-
-function HourlyCards() {
   return (
     <div className="container">
       <Slider {...settings}>
