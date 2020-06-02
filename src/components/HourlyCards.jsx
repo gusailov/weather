@@ -1,14 +1,16 @@
 import React from "react";
 import forecast from "../forecast.json";
-import { dateFormat } from "../utils";
+import { dateFormatHourly } from "../utils";
 import sprite from "./icons/sprite.svg";
 import Slider from "react-slick";
 import {SampleNextArrow,SamplePrevArrow} from "./Arrows"
 
-const daily = forecast.daily.data;
+const hourly = forecast.hourly.data;
+console.log(hourly);
+
 
 const settings = {
-  dots: true,
+  dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
@@ -17,24 +19,24 @@ const settings = {
   prevArrow: <SamplePrevArrow />,
 };
 
-function DailyCards() {
+function HourlyCards() {
   return (
-    <div className="container mb-5 mt-5">
+    <div className="container">
       <Slider {...settings}>
-        {daily.map((item) => (
+        {hourly.map((item) => (
           <div key={item.time} className="col sm">
             <div className="card card-block">
               <svg className="img-fluid">
                 <use xlinkHref={sprite + "#" + item.icon}></use>
               </svg>
               <span className="card-text">
-                <p>{Math.round(item.temperatureHigh) + "℃"}</p>
+                <p>{Math.round(item.temperature) + "℃"}</p>
               </span>
               <div className="card-text mx-auto">
                 <p>{item.summary}</p>
                  </div>
               <div className="card-text mx-auto">
-                <p>{dateFormat(item.time)}</p>
+                <p>{dateFormatHourly(item.time)}</p>
               </div>
             </div>
           </div>
@@ -44,4 +46,4 @@ function DailyCards() {
   );
 }
 
-export default DailyCards;
+export default HourlyCards;

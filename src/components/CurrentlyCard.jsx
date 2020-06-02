@@ -17,6 +17,7 @@ function CurrentlyCard() {
               {date} {Math.round(currently.temperature)}
               <span>&deg;C</span>
             </div>
+            <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
           </div>
 
           <div className="row">
