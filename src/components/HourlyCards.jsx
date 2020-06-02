@@ -2,23 +2,22 @@ import React from "react";
 import { dateFormatHourly } from "../utils";
 import sprite from "./icons/sprite.svg";
 import Slider from "react-slick";
-import {SampleNextArrow,SamplePrevArrow} from "./Arrows"
-
-
+import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 
 function HourlyCards(props) {
-  const {forecast} = props
+  const { forecast } = props;
   const hourly = forecast.hourly.data;
 
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />,
-};
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
+
   return (
     <div className="container">
       <Slider {...settings}>
@@ -33,7 +32,7 @@ const settings = {
               </span>
               <div className="card-text mx-auto">
                 <p>{item.summary}</p>
-                 </div>
+              </div>
               <div className="card-text mx-auto">
                 <p>{dateFormatHourly(item.time)}</p>
               </div>

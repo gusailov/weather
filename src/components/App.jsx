@@ -3,17 +3,18 @@ import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import HourlyCards from "./HourlyCards";
 import forecast from "../forecast.json";
-import Api from "./Api"
-
-
-
+//import Api from "./Api";
 
 function App() {
- const forecast2 = Api().items
-  
-  console.log(forecast2);
-  
-    return (
+  //const forecast = Api().items;
+  //const isLoaded = Api().isLoaded;
+
+  console.log(forecast);
+  if (!forecast || forecast.length === 0) {
+    return <div>Loading...</div>;
+  }
+  //console.log(forecast);
+  return (
     <div>
       <CurrentlyCard forecast={forecast}></CurrentlyCard>
       <DailyCards forecast={forecast}></DailyCards>
