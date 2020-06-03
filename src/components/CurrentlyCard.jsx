@@ -1,6 +1,5 @@
 import React from "react";
 import { dateFormat } from "../utils";
-import sprite from "./icons/sprite.svg";
 
 function CurrentlyCard(props) {
   const { forecast } = props;
@@ -24,7 +23,10 @@ function CurrentlyCard(props) {
           </div>
 
           <div className="row">
-          <img  src={"http://openweathermap.org/img/wn/"+ iconName + "@2x.png"} alt="альтернативный текст" />
+            <img
+              src={"http://openweathermap.org/img/wn/" + iconName + "@2x.png"}
+              alt="альтернативный текст"
+            />
           </div>
           <div className="card-title blue-text text-darken-2 center-align col">
             {currently.weather[0].description}

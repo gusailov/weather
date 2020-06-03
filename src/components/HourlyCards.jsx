@@ -1,13 +1,12 @@
 import React from "react";
 import { dateFormatHourly } from "../utils";
-import sprite from "./icons/sprite.svg";
+
 import Slider from "react-slick";
 import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 
 function HourlyCards(props) {
   const { forecast } = props;
   const hourly = forecast.hourly;
- 
 
   const settings = {
     dots: false,
@@ -25,7 +24,15 @@ function HourlyCards(props) {
         {hourly.map((item) => (
           <div key={item.time} className="col sm">
             <div className="card card-block">
-            <img className="card-img-top" src={"http://openweathermap.org/img/wn/"+ item.weather[0].icon + "@2x.png"} alt="альтернативный текст" />
+              <img
+                className="card-img-top"
+                src={
+                  "http://openweathermap.org/img/wn/" +
+                  item.weather[0].icon +
+                  "@2x.png"
+                }
+                alt="альтернативный текст"
+              />
               <span className="card-text">
                 <p>{Math.round(item.temperature) + "℃"}</p>
               </span>

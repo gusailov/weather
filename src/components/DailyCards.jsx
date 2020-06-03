@@ -1,13 +1,12 @@
 import React from "react";
 import { dateFormat } from "../utils";
-import sprite from "./icons/sprite.svg";
+
 import Slider from "react-slick";
 import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 
 function DailyCards(props) {
   const { forecast } = props;
   const daily = forecast.daily;
-  const iconName = forecast.daily;
 
   const settings = {
     dots: true,
@@ -25,7 +24,15 @@ function DailyCards(props) {
         {daily.map((item) => (
           <div key={item.time} className="col sm">
             <div className="card card-block">
-            <img className="card-img-top" src={"http://openweathermap.org/img/wn/"+ item.weather[0].icon + "@2x.png"} alt="альтернативный текст" />
+              <img
+                className="card-img-top"
+                src={
+                  "http://openweathermap.org/img/wn/" +
+                  item.weather[0].icon +
+                  "@2x.png"
+                }
+                alt="альтернативный текст"
+              />
               <span className="card-text">
                 <p>{Math.round(item.temperatureHigh) + "℃"}</p>
               </span>
