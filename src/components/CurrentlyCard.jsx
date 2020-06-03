@@ -4,9 +4,9 @@ import sprite from "./icons/sprite.svg";
 
 function CurrentlyCard(props) {
   const { forecast } = props;
-  const currentlyIconName = forecast.currently.icon;
-  const currently = forecast.currently;
-  const date = dateFormat(currently.time);
+  const iconName = forecast.current.weather[0].icon;
+  const currently = forecast.current;
+  const date = dateFormat(currently.dt);
 
   return (
     <div className="container mb-5 mt-5">
@@ -14,7 +14,7 @@ function CurrentlyCard(props) {
         <div className="">
           <div className="">
             <div>
-              {date} {Math.round(currently.temperature)}
+              {date} {Math.round(currently.temp)}
               <span>&deg;C</span>
             </div>
             <span
@@ -24,22 +24,19 @@ function CurrentlyCard(props) {
           </div>
 
           <div className="row">
-            <svg className="card-image">
-              {" "}
-              <use xlinkHref={sprite + "#" + currentlyIconName}></use>
-            </svg>{" "}
+          <img  src={"http://openweathermap.org/img/wn/"+ iconName + "@2x.png"} alt="альтернативный текст" />
           </div>
           <div className="card-title blue-text text-darken-2 center-align col">
-            {currently.summary}
+            {currently.weather[0].description}
           </div>
         </div>
 
         <div className="card-content col s12">
           <div className="">
-            {"WindSpeed -" + Math.round(currently.windSpeed) + "m/s"}
+            {"WindSpeed -" + Math.round(currently.wind_speed) + "m/s"}
           </div>
           <div className="col s2">
-            {"Feels like -" + Math.round(currently.apparentTemperature)}
+            {"Feels like -" + Math.round(currently.feels_like)}
             <span>&deg;C</span>
           </div>
           <div className="">

@@ -6,7 +6,8 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 
 function DailyCards(props) {
   const { forecast } = props;
-  const daily = forecast.daily.data;
+  const daily = forecast.daily;
+  const iconName = forecast.daily;
 
   const settings = {
     dots: true,
@@ -24,9 +25,7 @@ function DailyCards(props) {
         {daily.map((item) => (
           <div key={item.time} className="col sm">
             <div className="card card-block">
-              <svg className="img-fluid">
-                <use xlinkHref={sprite + "#" + item.icon}></use>
-              </svg>
+            <img className="card-img-top" src={"http://openweathermap.org/img/wn/"+ item.weather[0].icon + "@2x.png"} alt="альтернативный текст" />
               <span className="card-text">
                 <p>{Math.round(item.temperatureHigh) + "℃"}</p>
               </span>

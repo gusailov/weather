@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import HourlyCards from "./HourlyCards";
-import forecast from "../forecast.json";
-//import Api from "./Api";
+import forecast from "../forecastOpen.json";
+import Api from "./Api";
 
 function App() {
-  //const forecast = Api().items;
+  const forecast2 = Api().items;
   //const isLoaded = Api().isLoaded;
 
-  console.log(forecast);
+  console.log(forecast.daily);
   if (!forecast || forecast.length === 0) {
     return <div>Loading...</div>;
   }

@@ -34,13 +34,7 @@ function Api() {
     //console.log(position.latitude);
     //console.log(position.longitude);
 
-    fetch(`https://dark-sky.p.rapidapi.com/${ltd},${lng}?lang=en&units=auto`, {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "dark-sky.p.rapidapi.com",
-        "x-rapidapi-key": "",
-      },
-    })
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${ltd}&lon=${lng}&exclude={part}&appid=`)
       .then((res) => res.json())
       .then(
         (result) => {

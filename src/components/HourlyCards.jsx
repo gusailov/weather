@@ -6,7 +6,8 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 
 function HourlyCards(props) {
   const { forecast } = props;
-  const hourly = forecast.hourly.data;
+  const hourly = forecast.hourly;
+ 
 
   const settings = {
     dots: false,
@@ -24,9 +25,7 @@ function HourlyCards(props) {
         {hourly.map((item) => (
           <div key={item.time} className="col sm">
             <div className="card card-block">
-              <svg className="img-fluid">
-                <use xlinkHref={sprite + "#" + item.icon}></use>
-              </svg>
+            <img className="card-img-top" src={"http://openweathermap.org/img/wn/"+ item.weather[0].icon + "@2x.png"} alt="альтернативный текст" />
               <span className="card-text">
                 <p>{Math.round(item.temperature) + "℃"}</p>
               </span>
