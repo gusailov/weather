@@ -33,8 +33,10 @@ function Api() {
   useEffect(() => {
     //console.log(position.latitude);
     //console.log(position.longitude);
-    
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${ltd}&lon=${lng}&units=metric&exclude={part}&appid=ce8dda5c75f25be3409d7b0e73436bf9`)
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${ltd}&lon=${lng}&units=metric&exclude={part}&appid=`
+    )
       .then((res) => res.json())
       .then(
         (result) => {
@@ -47,7 +49,7 @@ function Api() {
         }
       );
   }, [ltd, lng]);
-  //console.log(items);
+  console.log("position", position);
   return {
     items: items,
     ltd: position.latitude,
