@@ -6,10 +6,12 @@ import forecast from "../forecastOpen.json";
 import Api from "./Api";
 
 function App() {
-  const forecast2 = Api().items;
+  //const forecast = Api().items;
   //const isLoaded = Api().isLoaded;
-
-  console.log(forecast.daily);
+//const forecast = undefined
+ //const forecast ={ error:true, 
+  //message:"error"}
+  //console.log(forecast2);
   if (!forecast || forecast.length === 0) {
     return <div>Loading...</div>;
   }

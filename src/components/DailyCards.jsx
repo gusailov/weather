@@ -17,12 +17,16 @@ function DailyCards(props) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
+  if (forecast.error) {
+    return <div>Помилка: {forecast.error.message}</div>;
+  } else if (!forecast || forecast.length === 0) {
+    return <div>Завантаження...</div>;
+  } else {
   return (
     <div className="container mb-5 mt-5">
       <Slider {...settings}>
         {daily.map((item) => (
-          <div key={item.time} className="col sm">
+          <div key={item.dt} className="col sm">
             <div className="card card-block">
               <img
                 className="card-img-top"
@@ -34,13 +38,13 @@ function DailyCards(props) {
                 alt="альтернативный текст"
               />
               <span className="card-text">
-                <p>{Math.round(item.temperatureHigh) + "℃"}</p>
+                <p>{Math.round(item.temp.day) + "℃"}</p>
               </span>
               <div className="card-text mx-auto">
                 <p>{item.summary}</p>
               </div>
               <div className="card-text mx-auto">
-                <p>{dateFormat(item.time)}</p>
+                <p>{dateFormat(item.dt)}</p>
               </div>
             </div>
           </div>
@@ -49,5 +53,5 @@ function DailyCards(props) {
     </div>
   );
 }
-
+}
 export default DailyCards;

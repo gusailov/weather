@@ -17,12 +17,16 @@ function HourlyCards(props) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
+  if (forecast.error) {
+    return <div>Помилка: {forecast.error.message}</div>;
+  } else if (!forecast || forecast.length === 0) {
+    return <div>Завантаження...</div>;
+  } else {
   return (
     <div className="container">
       <Slider {...settings}>
         {hourly.map((item) => (
-          <div key={item.time} className="col sm">
+          <div key={item.dt} className="col sm">
             <div className="card card-block">
               <img
                 className="card-img-top"
@@ -34,13 +38,13 @@ function HourlyCards(props) {
                 alt="альтернативный текст"
               />
               <span className="card-text">
-                <p>{Math.round(item.temperature) + "℃"}</p>
+                <p>{Math.round(item.temp) + "℃"}</p>
               </span>
               <div className="card-text mx-auto">
                 <p>{item.summary}</p>
               </div>
               <div className="card-text mx-auto">
-                <p>{dateFormatHourly(item.time)}</p>
+                <p>{dateFormatHourly(item.dt)}</p>
               </div>
             </div>
           </div>
@@ -49,5 +53,5 @@ function HourlyCards(props) {
     </div>
   );
 }
-
+}
 export default HourlyCards;

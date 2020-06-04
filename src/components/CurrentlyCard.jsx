@@ -6,7 +6,11 @@ function CurrentlyCard(props) {
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;
   const date = dateFormat(currently.dt);
-
+  if (forecast.error) {
+    return <div>Помилка: {forecast.error.message}</div>;
+  } else if (!forecast || forecast.length === 0) {
+    return <div>Завантаження...</div>;
+  } else {
   return (
     <div className="container mb-5 mt-5">
       <div className="card">
@@ -53,6 +57,6 @@ function CurrentlyCard(props) {
       </div>
     </div>
   );
-}
+}}
 
 export default CurrentlyCard;
