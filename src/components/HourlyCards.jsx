@@ -7,8 +7,7 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 function HourlyCards(props) {
   const { forecast } = props;
   const hourly = forecast.hourly;
-
-  const settings = {
+   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
@@ -17,11 +16,7 @@ function HourlyCards(props) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  if (forecast.error) {
-    return <div>Помилка: {forecast.error.message}</div>;
-  } else if (!forecast || forecast.length === 0) {
-    return <div>Завантаження...</div>;
-  } else {
+  
   return (
     <div className="container">
       <Slider {...settings}>
@@ -53,5 +48,5 @@ function HourlyCards(props) {
     </div>
   );
 }
-}
+
 export default HourlyCards;

@@ -7,7 +7,6 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 function DailyCards(props) {
   const { forecast } = props;
   const daily = forecast.daily;
-
   const settings = {
     dots: true,
     infinite: true,
@@ -17,11 +16,7 @@ function DailyCards(props) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  if (forecast.error) {
-    return <div>Помилка: {forecast.error.message}</div>;
-  } else if (!forecast || forecast.length === 0) {
-    return <div>Завантаження...</div>;
-  } else {
+  
   return (
     <div className="container mb-5 mt-5">
       <Slider {...settings}>
@@ -53,5 +48,5 @@ function DailyCards(props) {
     </div>
   );
 }
-}
+
 export default DailyCards;
