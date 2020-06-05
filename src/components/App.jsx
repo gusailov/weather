@@ -3,14 +3,22 @@ import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import HourlyCards from "./HourlyCards";
 //import SearchPlace from "./SearchPlace";
-import SearchGoo from "./Search";
+//import SearchGoo from "./Search";
+import Switchlang from "./Switchlang"
+ 
+ 
 
 function App() {
   const [error, setError] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [position, setPosition] = useState([]);
-
+  const [lang, setLang] = useState("en"); 
+  
+  const getLang = (lang) => {
+    setLang (lang)
+  };
+  
   useEffect(() => {
     var options = {
       enableHighAccuracy: true,
@@ -30,10 +38,10 @@ function App() {
   //const searchPosition = (pos) => {
   //   setPosition(pos);
   // };
-  console.log(position);
-
+  
+  
   const getForecast = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&units=metric&exclude={part}&appid=`;
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&lang=${lang}&units=metric&exclude={part}&appid=`;
     await fetch(url)
       .then((res) => res.json())
       .then(
@@ -49,13 +57,15 @@ function App() {
       );
   };
   useEffect(() => {
-    getForecast();
-  }, [position]);
+        getForecast();
+  }, [lang, position]);
 
   if (items.message) {
     return (
-      <div>
-        <div><SearchGoo className="row"></SearchGoo></div>
+      <div className="container">
+        <div className="row">
+        <Switchlang getLang={getLang}></Switchlang>
+               </div>
         Помилка: {items.message}
       </div>
     );
@@ -63,8 +73,10 @@ function App() {
     return <div>Завантаження...</div>;
   } else {
     return (
-      <div>
-        
+      <div className="container">
+        <div className="row">
+        <Switchlang getLang={getLang}></Switchlang>
+                </div>
         <CurrentlyCard
           forecast={items}
           isLoaded={isLoaded}

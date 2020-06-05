@@ -4,9 +4,10 @@ export function dateFormat(time) {
     month: "long",
     day: "numeric",
   };
+  
   const milliseconds = time * 1000;
   const dateObject = new Date(milliseconds);
-  const humanDateFormat = dateObject.toLocaleString("uk-UK", options);
+  const humanDateFormat = dateObject.toLocaleString('en-US', options);
   return humanDateFormat;
 }
 
