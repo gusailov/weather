@@ -55,7 +55,7 @@ function App() {
   if (items.message) {
     return (
       <div>
-        <div></div>
+        <div><SearchGoo className="row"></SearchGoo></div>
         Помилка: {items.message}
       </div>
     );
@@ -64,7 +64,7 @@ function App() {
   } else {
     return (
       <div>
-        <SearchGoo className="row"></SearchGoo>
+        
         <CurrentlyCard
           forecast={items}
           isLoaded={isLoaded}
