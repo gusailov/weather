@@ -16,7 +16,7 @@ function DailyCards(props) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  
+
   return (
     <div className="container mb-5 mt-5">
       <Slider {...settings}>
@@ -39,7 +39,7 @@ function DailyCards(props) {
                 <p>{item.summary}</p>
               </div>
               <div className="card-text mx-auto">
-                <p>{dateFormat(item.dt)}</p>
+                <p>{dateFormat(item.dt, props.lang)}</p>
               </div>
             </div>
           </div>

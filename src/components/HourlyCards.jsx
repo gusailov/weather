@@ -7,7 +7,7 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 function HourlyCards(props) {
   const { forecast } = props;
   const hourly = forecast.hourly;
-   const settings = {
+  const settings = {
     dots: false,
     infinite: true,
     speed: 500,
@@ -16,7 +16,7 @@ function HourlyCards(props) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  
+
   return (
     <div className="container">
       <Slider {...settings}>
@@ -39,7 +39,7 @@ function HourlyCards(props) {
                 <p>{item.summary}</p>
               </div>
               <div className="card-text mx-auto">
-                <p>{dateFormatHourly(item.dt)}</p>
+                <p>{dateFormatHourly(item.dt, props.lang)}</p>
               </div>
             </div>
           </div>
