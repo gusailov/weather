@@ -47,7 +47,7 @@ function Search(props) {
   });
   const [position, setCoords] = useState([]);
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
-    const handleInput = (e) => {
+  const handleInput = (e) => {
     setValue(e.target.value);
   };
 
@@ -63,8 +63,8 @@ function Search(props) {
       console.log("😱 Error: ", error);
     }
   };
-  props.searchPosition(position);
-  
+  props.searchPosition("searchPosition - ", position);
+
   return (
     <div className="search">
       <Combobox onSelect={handleSelect}>
