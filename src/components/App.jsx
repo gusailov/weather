@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import GetCoords from "./GetCoords";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import HourlyCards from "./HourlyCards";
@@ -13,27 +14,19 @@ function App() {
   const [items, setItems] = useState([]);
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
-  console.log("App POS Glob-", position);
-
+  const latitude = GetCoords().position.latitude;
+  const longitude = GetCoords().position.longitude;
   const getLang = (lang) => {
     setLang(lang);
   };
+  console.log("position APP-", position);
 
   useEffect(() => {
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
-    function success(pos) {
-      var crd = pos.coords;
-      setPosition({ latitude: crd.latitude, longitude: crd.longitude });
-    }
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-    navigator.geolocation.getCurrentPosition(success, error, options);
-  }, []);
+    setPosition({
+      latitude: latitude,
+      longitude: longitude,
+    });
+  }, [latitude, longitude]);
 
   const searchPosition = (pos) => {
     console.log("APp pos -", pos);

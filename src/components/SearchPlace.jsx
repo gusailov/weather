@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import GetCoords from "./GetCoords";
 import { useLoadScript } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -28,7 +29,7 @@ export default function SearchPlace(props) {
 
   return (
     <div>
-      <Search position={props.position} searchPosition={props.searchPosition} />
+      <Search pos={props.position} searchPosition={props.searchPosition} />
     </div>
   );
 }
@@ -41,11 +42,12 @@ const Search = (props) => {
     setValue,
     clearSuggestions,
   } = usePlacesAutocomplete();
-  const [position, setCoords] = useState(props.position);
+  const [position, setCoords] = useState(props.pos);
   const handleInput = (e) => {
     setValue(e.target.value);
   };
-  console.log("Search props - ", position);
+  console.log("Search props - ", props.pos);
+
   const handleSelect = async (address) => {
     setValue(address, false);
     clearSuggestions();
