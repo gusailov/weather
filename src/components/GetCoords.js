@@ -17,9 +17,11 @@ function GetCoords() {
     }
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
-  return {
-    position,
-  };
+  if (position) {
+    return {
+      position,
+    };
+  }
 }
 
 export default GetCoords;

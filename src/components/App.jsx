@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import GetCoords from "./GetCoords";
+//import GetCoords from "./GetCoords";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import HourlyCards from "./HourlyCards";
@@ -14,23 +14,17 @@ function App() {
   const [items, setItems] = useState([]);
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
-  const latitude = GetCoords().position.latitude;
-  const longitude = GetCoords().position.longitude;
+  //const latitude = GetCoords().position.latitude;
+  // const longitude = GetCoords().position.longitude;
   const getLang = (lang) => {
     setLang(lang);
   };
-  console.log("position APP-", position);
-
-  useEffect(() => {
-    setPosition({
-      latitude: latitude,
-      longitude: longitude,
-    });
-  }, [latitude, longitude]);
 
   const searchPosition = (pos) => {
-    console.log("APp pos -", pos);
-    //setPosition({ latitude: pos.lat, longitude: pos.lng });
+    if (pos) {
+      console.log("APp searchPosition -", pos);
+      setPosition(pos);
+    }
   };
 
   useEffect((pos) => {
@@ -55,7 +49,12 @@ function App() {
       );
   };
   useEffect(() => {
-    getForecast();
+    const isEmpty = (position) => Object.keys(position).length === 0;
+    console.log("isEmpty", Object.keys(position).length);
+    console.log("positiong etForecast -", position);
+    if (isEmpty) {
+      getForecast();
+    }
   }, [lang, position]);
 
   if (items.message) {

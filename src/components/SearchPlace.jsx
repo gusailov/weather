@@ -42,11 +42,18 @@ const Search = (props) => {
     setValue,
     clearSuggestions,
   } = usePlacesAutocomplete();
-  const [position, setCoords] = useState(props.pos);
+  const [position, setCoords] = useState({});
   const handleInput = (e) => {
     setValue(e.target.value);
   };
-  console.log("Search props - ", props.pos);
+  const latitude = GetCoords().position.latitude;
+  const longitude = GetCoords().position.longitude;
+  useEffect(() => {
+    setCoords({
+      latitude: latitude,
+      longitude: longitude,
+    });
+  }, [latitude, longitude]);
 
   const handleSelect = async (address) => {
     setValue(address, false);
@@ -61,9 +68,11 @@ const Search = (props) => {
   };
 
   useEffect(() => {
-    props.searchPosition(position);
-    console.log("searchPosition - ", position);
-  }, [props, position]);
+    if (position) {
+      props.searchPosition(position);
+      console.log("searchPosition - ", position);
+    }
+  }, [position]);
 
   return (
     <Combobox onSelect={handleSelect} aria-labelledby="demo">
