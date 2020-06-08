@@ -19,7 +19,7 @@ const libraries = ["places"];
 
 export default function SearchPlace(props) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyBdjmlVSVNfZvFOpnWJp03DakOfJVt5xAA",
     //AIzaSyBdjmlVSVNfZvFOpnWJp03DakOfJVt5xAA
     libraries,
   });

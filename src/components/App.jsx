@@ -49,10 +49,10 @@ function App() {
       );
   };
   useEffect(() => {
-    const isEmpty = (position) => Object.keys(position).length === 0;
-    console.log("isEmpty", Object.keys(position).length);
-    console.log("positiong etForecast -", position);
-    if (isEmpty) {
+    const isEmpty = (position) => Object.values(position);
+    console.log("isEmpty", Object.values(position).length);
+    console.log("positionget Forecast -", position);
+    if (position.latitude) {
       getForecast();
     }
   }, [lang, position]);
