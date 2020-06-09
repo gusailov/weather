@@ -33,7 +33,7 @@ function App() {
 
   const getForecast = async () => {
     const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&lang=${lang}&units=metric&exclude={part}&appid=`;
-    //ce8dda5c75f25be3409d7b0e73436bf9
+    //
     await fetch(url)
       .then((res) => res.json())
       .then(
