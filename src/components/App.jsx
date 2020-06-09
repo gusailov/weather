@@ -16,6 +16,8 @@ function App() {
   const [lang, setLang] = useState("en");
   //const latitude = GetCoords().position.latitude;
   // const longitude = GetCoords().position.longitude;
+  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API
+    
   const getLang = (lang) => {
     setLang(lang);
   };
@@ -32,8 +34,8 @@ function App() {
   }, []);
 
   const getForecast = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&lang=${lang}&units=metric&exclude={part}&appid=`;
-    //
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&lang=${lang}&units=metric&exclude={part}&appid=${OPEN_WEATHER_MAP_API_KEY}`;
+    
     await fetch(url)
       .then((res) => res.json())
       .then(
@@ -49,12 +51,9 @@ function App() {
       );
   };
   useEffect(() => {
-    const isEmpty = (position) => Object.values(position);
-    console.log("isEmpty", Object.values(position).length);
-    console.log("positionget Forecast -", position);
-    if (position.latitude) {
-      getForecast();
-    }
+       console.log("positionget Forecast -", position);
+         getForecast();
+    
   }, [lang, position]);
 
   if (items.message) {
@@ -77,6 +76,10 @@ function App() {
       <div className="container">
         <div className="row">
           <Switchlang getLang={getLang}></Switchlang>
+          <SearchPlace
+            searchPosition={searchPosition}
+            position={position}
+          ></SearchPlace>
         </div>
         <CurrentlyCard
           forecast={items}

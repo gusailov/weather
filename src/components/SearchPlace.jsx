@@ -19,10 +19,10 @@ const libraries = ["places"];
 
 export default function SearchPlace(props) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
     libraries,
   });
-
+  
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -60,14 +60,18 @@ const Search = (props) => {
     try {
       const results = await getGeocode({ address });
       const position = await getLatLng(results[0]);
-      setCoords(position);
+      console.log("handleSelect",position);
+      setCoords({
+        latitude: position.lat,
+        longitude: position.lng,
+      });
     } catch (error) {
       console.log("😱 Error: ", error);
     }
   };
 
   useEffect(() => {
-    if (position) {
+    if (position.latitude && position.longitude) {
       props.searchPosition(position);
       console.log("searchPosition - ", position);
     }
