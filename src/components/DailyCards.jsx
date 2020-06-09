@@ -1,6 +1,5 @@
 import React from "react";
 import { dateFormat } from "../utils";
-
 import Slider from "react-slick";
 import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 

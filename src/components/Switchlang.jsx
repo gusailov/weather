@@ -2,14 +2,9 @@ import React, { useState, useEffect } from "react";
 
 function Switchlang(props) {
   const [lang , setLang] = useState('en')
-  
-  useEffect(() => {
-   
-        props.getLang(lang)
+   useEffect(() => {
+    props.getLang(lang)
 }, [lang]);
-    
-      
-    
   
   return(
   <div>    

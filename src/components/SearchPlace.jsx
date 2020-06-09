@@ -60,7 +60,6 @@ const Search = (props) => {
     try {
       const results = await getGeocode({ address });
       const position = await getLatLng(results[0]);
-      console.log("handleSelect",position);
       setCoords({
         latitude: position.lat,
         longitude: position.lng,
@@ -69,11 +68,9 @@ const Search = (props) => {
       console.log("😱 Error: ", error);
     }
   };
-
   useEffect(() => {
     if (position.latitude && position.longitude) {
       props.searchPosition(position);
-      console.log("searchPosition - ", position);
     }
   }, [position]);
 

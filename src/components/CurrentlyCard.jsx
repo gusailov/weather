@@ -11,8 +11,9 @@ function CurrentlyCard(props) {
     <div className="container mb-5 mt-5">
       <div className="card">
         <div className="">
+  <p>Weather in {forecast.lat}</p>
           <div className="">
-            <div>
+                        <div>
               {date} {Math.round(currently.temp)}
               <span>&deg;C</span>
             </div>

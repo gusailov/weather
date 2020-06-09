@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-//import GetCoords from "./GetCoords";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import HourlyCards from "./HourlyCards";
 import SearchPlace from "./SearchPlace";
-//import SearchGoo from "./Search";
 import Switchlang from "./Switchlang";
-//import items from "../forecastOpen.json";
+import Spinner from "./Spinner"
+import items from "../forecastOpen.json";
 
 function App() {
   const [error, setError] = useState();
@@ -14,8 +13,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
-  //const latitude = GetCoords().position.latitude;
-  // const longitude = GetCoords().position.longitude;
+  
   const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API
     
   const getLang = (lang) => {
@@ -24,7 +22,6 @@ function App() {
 
   const searchPosition = (pos) => {
     if (pos) {
-      console.log("APp searchPosition -", pos);
       setPosition(pos);
     }
   };
@@ -51,17 +48,14 @@ function App() {
       );
   };
   useEffect(() => {
-       console.log("positionget Forecast -", position);
-         getForecast();
-    
-  }, [lang, position]);
+       getForecast();
+      }, [lang, position]);
 
   if (items.message) {
     return (
       <div className="container">
         <div className="row">
-          <Switchlang getLang={getLang}></Switchlang>
-          <SearchPlace
+           <SearchPlace
             searchPosition={searchPosition}
             position={position}
           ></SearchPlace>
@@ -70,7 +64,7 @@ function App() {
       </div>
     );
   } else if (!isLoaded || items.length === 0) {
-    return <div>Завантаження...</div>;
+    return <Spinner></Spinner>;
   } else {
     return (
       <div className="container">
@@ -80,6 +74,7 @@ function App() {
             searchPosition={searchPosition}
             position={position}
           ></SearchPlace>
+          
         </div>
         <CurrentlyCard
           forecast={items}

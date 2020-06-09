@@ -4,12 +4,11 @@ import PropTypes from 'prop-types'
 
 const Spinner = ({ children }) => {
     return (
-        <div className="ui icon message">
-            <i className="notched circle loading icon" />
-            <div className="content">
-                <div className="header">{children}</div>
-            </div>
+        <div className="d-flex justify-content-center">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">{children}</span>
         </div>
+      </div>
     )
 }
 
