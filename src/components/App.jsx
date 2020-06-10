@@ -5,7 +5,7 @@ import HourlyCards from "./HourlyCards";
 import SearchPlace from "./SearchPlace";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner"
-import items from "../forecastOpen.json";
+//import items from "../forecastOpen.json";
 
 function App() {
   const [error, setError] = useState();
@@ -14,7 +14,7 @@ function App() {
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
   
-  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API
+  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
     
   const getLang = (lang) => {
     setLang(lang);

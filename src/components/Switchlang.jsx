@@ -12,7 +12,7 @@ function Switchlang(props) {
                setLang(e.target.value)
       }} className="custom-select" >
         <option value="en">English</option>
-        <option value="ua">Ukrainian</option>
+        <option value="uk">Ukrainian</option>
     </select>
  
  </div>

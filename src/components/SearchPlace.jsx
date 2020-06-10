@@ -19,7 +19,7 @@ const libraries = ["places"];
 
 export default function SearchPlace(props) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
   
@@ -53,6 +53,7 @@ const Search = (props) => {
       longitude: longitude,
     });
   }, [latitude, longitude]);
+
 
   const handleSelect = async (address) => {
     setValue(address, false);

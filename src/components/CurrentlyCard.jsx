@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { dateFormat } from "../utils";
-
+import Geocode from "react-geocode"
 function CurrentlyCard(props) {
+  Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
   const { forecast } = props;
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;
   const date = dateFormat(currently.dt, props.lang);
+  console.log(" props.lang", props.lang);
+  
+  Geocode.setLanguage(`${props.lang}`);
+  useEffect(() => {
+    Geocode.fromLatLng(forecast.lat, forecast.lon).then(
+      response => {
+        const address = response.results[0].address_components[1].long_name;
+        console.log(address);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }, [props.lang]);
 
+  
   return (
     <div className="container mb-5 mt-5">
       <div className="card">
