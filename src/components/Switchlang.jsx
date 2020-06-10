@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "./Context";
 
 function Switchlang(props) {
-  const [lang , setLang] = useState('en')
-   useEffect(() => {
-    props.getLang(lang)
-}, [lang]);
-  
-  return(
-  <div>    
-    <select onChange={e => {
-               setLang(e.target.value)
-      }} className="custom-select" >
+  const { setLan } = useContext(Context);
+  console.log("useContext", useContext(Context));
+
+  return (
+    <div>
+      <select
+        onChange={(e) => {
+          setLan(e.target.value);
+        }}
+        className="custom-select"
+      >
         <option value="en">English</option>
         <option value="uk">Ukrainian</option>
-    </select>
- 
- </div>
- )}
+      </select>
+    </div>
+  );
+}
 
 export default Switchlang;

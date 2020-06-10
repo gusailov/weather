@@ -22,7 +22,7 @@ export default function SearchPlace(props) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
     libraries,
   });
-  
+
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
@@ -53,7 +53,6 @@ const Search = (props) => {
       longitude: longitude,
     });
   }, [latitude, longitude]);
-
 
   const handleSelect = async (address) => {
     setValue(address, false);

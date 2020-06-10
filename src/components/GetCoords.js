@@ -4,7 +4,7 @@ function GetCoords() {
   const [position, setPosition] = useState([]);
   var options = {
     enableHighAccuracy: true,
-    timeout: 5000,
+    timeout: 3000,
     maximumAge: 0,
   };
   useEffect(() => {
@@ -17,6 +17,7 @@ function GetCoords() {
     }
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
+
   if (position) {
     return {
       position,

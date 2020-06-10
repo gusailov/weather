@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { dateFormat } from "../utils";
-import Geocode from "react-geocode"
+import Geocode from "react-geocode";
 function CurrentlyCard(props) {
   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API);
   const { forecast } = props;
@@ -8,28 +8,27 @@ function CurrentlyCard(props) {
   const currently = forecast.current;
   const date = dateFormat(currently.dt, props.lang);
   console.log(" props.lang", props.lang);
-  
+
   Geocode.setLanguage(`${props.lang}`);
   useEffect(() => {
     Geocode.fromLatLng(forecast.lat, forecast.lon).then(
-      response => {
+      (response) => {
         const address = response.results[0].address_components[1].long_name;
         console.log(address);
       },
-      error => {
+      (error) => {
         console.error(error);
       }
     );
   }, [props.lang]);
 
-  
   return (
     <div className="container mb-5 mt-5">
       <div className="card">
         <div className="">
-  <p>Weather in {forecast.lat}</p>
+          <p>Weather in {forecast.lat}</p>
           <div className="">
-                        <div>
+            <div>
               {date} {Math.round(currently.temp)}
               <span>&deg;C</span>
             </div>
