@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { dateFormat } from "../utils";
 import Geocode from "react-geocode"
 function CurrentlyCard(props) {
-  Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+  Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API);
   const { forecast } = props;
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;

@@ -14,7 +14,7 @@ function App() {
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
   
-  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY
+  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API
     
   const getLang = (lang) => {
     setLang(lang);
