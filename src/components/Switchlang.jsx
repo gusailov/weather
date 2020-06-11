@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useContext } from "react";
 import { Context } from "./Context";
 
-function Switchlang(props) {
+function Switchlang() {
   const { setLan } = useContext(Context);
   console.log("useContext", useContext(Context));
 
@@ -12,7 +12,7 @@ function Switchlang(props) {
           setLan(e.target.value);
         }}
         className="custom-select"
-      >
+     >
         <option value="en">English</option>
         <option value="uk">Ukrainian</option>
       </select>

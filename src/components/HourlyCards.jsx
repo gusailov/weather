@@ -18,6 +18,7 @@ function HourlyCards(props) {
 
   return (
     <div className="container">
+      <p className="card-title">Hourly Forecast</p>
       <Slider {...settings}>
         {hourly.map((item) => (
           <div key={item.dt} className="col sm">

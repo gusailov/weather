@@ -15,8 +15,8 @@ function App() {
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
 
-  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_;
-
+  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API;
+ 
   const searchPosition = (pos) => {
     if (pos) {
       setPosition(pos);
@@ -34,7 +34,7 @@ function App() {
       .then(
         (result) => {
           setIsLoaded(true);
-          // setItems(result);
+        //  setItems(result);
         },
         (error) => {
           console.log("message", error);
@@ -86,12 +86,7 @@ function App() {
             error={error}
             lang={lang}
           ></DailyCards>
-          <HourlyCards
-            forecast={items}
-            isLoaded={isLoaded}
-            error={error}
-            lang={lang}
-          ></HourlyCards>
+          
         </div>
       </Context.Provider>
     );
