@@ -6,9 +6,18 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 function HourlyCards(props) {
   const { forecast } = props;
   const hourly = forecast.hourly;
+  console.log("index", props.active);
+
+  const day = new Date(props.active * 1000);
+  console.log("day", day.getDate());
+  const filter = hourly.filter(
+    (item) => new Date(item.dt * 1000).getDate() === day.getDate()
+  );
+  console.log("filter", filter);
+
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -20,7 +29,7 @@ function HourlyCards(props) {
     <div className="container">
       <p className="card-title">Hourly Forecast</p>
       <Slider {...settings}>
-        {hourly.map((item) => (
+        {filter.map((item) => (
           <div key={item.dt} className="col sm">
             <div className="card card-block">
               <img

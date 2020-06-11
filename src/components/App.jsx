@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
-import HourlyCards from "./HourlyCards";
 import SearchPlace from "./SearchPlace";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner";
@@ -16,7 +15,7 @@ function App() {
   const [lang, setLang] = useState("en");
 
   const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API;
- 
+
   const searchPosition = (pos) => {
     if (pos) {
       setPosition(pos);
@@ -34,7 +33,7 @@ function App() {
       .then(
         (result) => {
           setIsLoaded(true);
-        //  setItems(result);
+          // setItems(result);
         },
         (error) => {
           console.log("message", error);
@@ -86,7 +85,6 @@ function App() {
             error={error}
             lang={lang}
           ></DailyCards>
-          
         </div>
       </Context.Provider>
     );
