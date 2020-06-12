@@ -24,6 +24,7 @@
     "react-dom": "^16.13.1",
     "react-geocode": "^0.2.1",
     "react-materialize": "^3.9.2",
+    "react-open-weather-icons": "^0.1.1",
     "react-scripts": "3.4.1",
     "react-skycons": "^0.7.0",
     "react-slick": "^0.26.1",

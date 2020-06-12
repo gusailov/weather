@@ -31,7 +31,7 @@ function HourlyCards(props) {
       <Slider {...settings}>
         {filter.map((item) => (
           <div key={item.dt} className="col sm">
-            <div className="card card-block">
+            <div className="tab-content">
               <img
                 className="card-img-top"
                 src={
