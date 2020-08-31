@@ -10,8 +10,8 @@ function CurrentlyCard(props) {
 
   return (
     <div className="container mb-5 mt-5">
-        <div className="card">
-          <div className="">
+      <div className="card">
+        <div className="card-body">
           <p>Current Weather in {forecast.lat}</p>
           <div className="">
             <div>
@@ -23,7 +23,6 @@ function CurrentlyCard(props) {
               aria-hidden="true"
             ></span>
           </div>
-
           <div className="row">
             <img
               src={"http://openweathermap.org/img/wn/" + iconName + "@2x.png"}
@@ -33,22 +32,13 @@ function CurrentlyCard(props) {
           <div className="card-title blue-text text-darken-2 center-align col">
             {currently.weather[0].description}
           </div>
-        </div>
-
-        <div className="card-content col s12">
-          <div className="">
-            {"WindSpeed -" + Math.round(currently.wind_speed) + "m/s"}
-          </div>
-          <div className="col s2">
-            {"Feels like -" + Math.round(currently.feels_like)}
-            <span>&deg;C</span>
-          </div>
-          <div className="">
-            <i className="material-icons right">more_vert</i>
-          </div>
-          <div className="col s2">
-            <div className="btn-floating waves-effect waves-light red">
-              <i className="material-icons">add</i>
+          <div className="card-content col s12">
+            <div className="">
+              {"WindSpeed -" + Math.round(currently.wind_speed) + "m/s"}
+            </div>
+            <div className="col s2">
+              {"Feels like -" + Math.round(currently.feels_like)}
+              <span>&deg;C</span>
             </div>
           </div>
         </div>

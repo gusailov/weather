@@ -26,7 +26,7 @@ function HourlyCards(props) {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <p className="card-title">Hourly Forecast</p>
       <Slider {...settings}>
         {filter.map((item) => (
