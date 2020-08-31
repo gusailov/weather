@@ -13,13 +13,13 @@ function DailyCards(props) {
   return (
     <div className="container" defaultActiveKey={daily.dt}>
       <p className="card-title">Daily Forecast</p>
-      <div className="nav nav-tabs nav-fill">
+      <div className="nav nav-tabs row">
         {daily.map((item) => {
           const index = item.dt;
           const isActive = index === activeIndex;
           return (
             <>
-              <div className="tab-content">
+              <div className="tab-content col p-0">
                 <div
                   className={`nav-link ${isActive ? "active" : ""}`}
                   onClick={() => setActiveIndex(index)}
@@ -29,11 +29,11 @@ function DailyCards(props) {
                     {(
                       <WeatherIcon
                         name={item.weather[0].icon}
-                        className="my-awesome-icon"
+                        className="w-70"
                       />
                     ) || (
                       <img
-                        className="card-img-top"
+                        className="w-70"
                         src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
                         alt="альтернативный текст"
                       />
