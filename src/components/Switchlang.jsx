@@ -1,18 +1,18 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "./Context";
 
 function Switchlang() {
   const { setLan } = useContext(Context);
-  console.log("useContext", useContext(Context));
+  //console.log("useContext", useContext(Context));
 
   return (
-    <div>
+    <div className="mr-5 ml-3">
       <select
         onChange={(e) => {
           setLan(e.target.value);
         }}
         className="custom-select"
-     >
+      >
         <option value="en">English</option>
         <option value="uk">Ukrainian</option>
       </select>

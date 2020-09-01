@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { dateFormat } from "../utils";
 
 function CurrentlyCard(props) {
@@ -6,7 +6,7 @@ function CurrentlyCard(props) {
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;
   const date = dateFormat(currently.dt, props.lang);
-  console.log(" props.lang", props.lang);
+  //console.log(" forecast", forecast);
 
   return (
     <div className="container mb-5 mt-5">

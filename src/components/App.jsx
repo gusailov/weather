@@ -66,7 +66,7 @@ function App() {
     return (
       <Context.Provider value={{ setLan }}>
         <div className="container">
-          <div className="row">
+          <div className="container row mt-2">
             <Switchlang></Switchlang>
             <SearchPlace
               searchPosition={searchPosition}
