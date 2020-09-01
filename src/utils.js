@@ -1,6 +1,5 @@
 export function dateFormat(time, lng) {
   var options = {
-    year: "numeric",
     month: "long",
     day: "numeric",
   };
@@ -13,7 +12,6 @@ export function dateFormat(time, lng) {
 
 export function dateFormatHourly(time, lng) {
   var options = {
-    year: "numeric",
     month: "long",
     day: "numeric",
     hour: "numeric",

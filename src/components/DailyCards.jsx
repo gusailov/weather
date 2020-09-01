@@ -19,42 +19,36 @@ function DailyCards(props) {
           const isActive = index === activeIndex;
           return (
             <>
-              <div className="tab-content col p-0">
-                <div
-                  className={`nav-link ${isActive ? "active" : ""}`}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  {" "}
-                  <>
-                    {(
-                      <WeatherIcon
-                        name={item.weather[0].icon}
-                        className="w-70"
-                      />
-                    ) || (
-                      <img
-                        className="w-70"
-                        src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                        alt="альтернативный текст"
-                      />
-                    )}
-                  </>
-                  <span className="card-text">
-                    <p>{Math.round(item.temp.day) + "℃"}</p>
-                  </span>
-                  <div className="card-text mx-auto">
-                    <p>{item.summary}</p>
-                  </div>
-                  <div className="card-text mx-auto">
-                    <p>{dateFormat(item.dt, props.lang)}</p>
-                  </div>
+              <div
+                className={`nav-link col p-0 ${isActive ? "active" : ""}`}
+                onClick={() => setActiveIndex(index)}
+              >
+                <>
+                  {(
+                    <WeatherIcon name={item.weather[0].icon} className="w-70" />
+                  ) || (
+                    <img
+                      className="w-70"
+                      src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                      alt="альтернативный текст"
+                    />
+                  )}
+                </>
+                <span className="card-text">
+                  <p>{Math.round(item.temp.day) + "℃"}</p>
+                </span>
+                <div className="card-text mx-auto">
+                  <p>{item.summary}</p>
+                </div>
+                <div className="card-text mx-auto text-nowrap">
+                  <p>{dateFormat(item.dt, props.lang)}</p>
                 </div>
               </div>
             </>
           );
         })}
       </div>
-      <div className="tab-content">
+      <div className="">
         <HourlyCards
           forecast={props.forecast}
           isLoaded={props.isLoaded}
