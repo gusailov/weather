@@ -3,8 +3,7 @@ import { Context } from "./Context";
 
 function Switchlang() {
   const { setLan } = useContext(Context);
-  //console.log("useContext", useContext(Context));
-
+ 
   return (
     <div className="mr-5 ml-3">
       <select

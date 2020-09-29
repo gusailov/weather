@@ -7,9 +7,7 @@ function DailyCards(props) {
   const { forecast } = props;
   const daily = forecast.daily;
   const [activeIndex, setActiveIndex] = useState(daily[0].dt);
-
-  //console.log(<WeatherIcon name={"02d"} className="my-awesome-icon" />);
-
+ 
   return (
     <div className="container">
       <p className="card-title">Daily Forecast</p>

@@ -6,15 +6,13 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 function HourlyCards(props) {
   const { forecast } = props;
   const hourly = forecast.hourly;
-  // console.log("index", props.active);
-
+  
   const day = new Date(props.active * 1000);
-  //console.log("day", day.getDate());
+  
   const filter = hourly.filter(
     (item) => new Date(item.dt * 1000).getDate() === day.getDate()
   );
-  //console.log("filter", filter);
-
+ 
   const settings = {
     dots: false,
     infinite: false,
