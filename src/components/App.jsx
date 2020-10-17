@@ -13,7 +13,8 @@ function App() {
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
 
-  const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
+  const OPEN_WEATHER_MAP_API_KEY =
+    process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
 
   const searchPosition = (pos) => {
     if (pos) {
@@ -43,6 +44,7 @@ function App() {
   };
   useEffect(() => {
     getForecast();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang, position]);
 
   const setLan = (l) => setLang(l);
