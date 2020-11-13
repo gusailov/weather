@@ -5,9 +5,10 @@ import SearchPlace from "./SearchPlace";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner";
 import { Context } from "./Context";
-import { getForecast } from './api';
+import { getForecast, getPlaceByCoords } from './api';
 import GetCoords from './GetCoords';
 import items from "../forecastOpen.json";
+import Button from '@material-ui/core/Button';
 
 function App() {
   const [error, setError] = useState(undefined);
@@ -44,7 +45,15 @@ function App() {
 
   // }, [lat, lon, lang])
 
-  console.log('items', items)
+  useEffect(() => {
+    if (lat && lon) {
+      const place = getPlaceByCoords(lat, lon).then((res) => { console.log('getPlaceByCoords', res.data.results[0].formatted) }
+      );
+      console.log('PLACE', place)
+
+    }
+
+  }, [lat, lon, lang])
 
 
 
@@ -70,6 +79,7 @@ function App() {
       <Context.Provider value={{ setLan }}>
         <div className="container">
           <div className="container row mt-2">
+
             <Switchlang></Switchlang>
             <SearchPlace
               searchPosition={searchPosition}
