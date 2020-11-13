@@ -1,6 +1,7 @@
 import * as axios from "axios";
 
 const OPEN_WEATHER_MAP_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
+console.log("OPEN_WEATHER_MAP_API_KEY", OPEN_WEATHER_MAP_API_KEY);
 
 export const getForecast = (lat, lon, lang) => {
   return axios.get(
