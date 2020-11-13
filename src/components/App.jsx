@@ -7,11 +7,12 @@ import Spinner from "./Spinner";
 import { Context } from "./Context";
 import { getForecast } from './api';
 import GetCoords from './GetCoords';
+import items from "../forecastOpen.json";
 
 function App() {
-  const [error, setError] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+  const [error, setError] = useState(undefined);
+  const [isLoaded, setIsLoaded] = useState(true);
+  // const [items, setItems] = useState([]);
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
 
@@ -24,23 +25,24 @@ function App() {
   const searchPosition = (pos) => {
     if (pos) {
       setPosition(pos);
+
     }
   };
 
 
-  useEffect(() => {
-    if (lat && lon) {
-      const forecast = getForecast(lat, lon, lang).then((res) => { setItems(res.data); setIsLoaded(true); }, (error) => {
-        console.log("message", error);
-        setIsLoaded(true);
-        setError(error);
-      }
-      );
-      console.log('getForecast', forecast)
+  // useEffect(() => {
+  //   if (lat && lon) {
+  //     const forecast = getForecast(lat, lon, lang).then((res) => { setItems(res.data); setIsLoaded(true); }, (error) => {
+  //       console.log("message", error);
+  //       setIsLoaded(true);
+  //       setError(error);
+  //     }
+  //     );
+  //     console.log('getForecast', forecast)
 
-    }
+  //   }
 
-  }, [lat, lon, lang])
+  // }, [lat, lon, lang])
 
   console.log('items', items)
 
