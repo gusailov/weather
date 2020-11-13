@@ -29,18 +29,23 @@ function App() {
 
 
   useEffect(() => {
-    const forecast = getForecast(lat, lon, lang).then((res) => setItems(res.data));
+    const forecast = getForecast(lat, lon, lang).then((res) => { setItems(res.data); setIsLoaded(true); }, (error) => {
+      console.log("message", error);
+      setIsLoaded(true);
+      setError(error);
+    }
+    );
     console.log('getForecast', forecast)
   }, [lat, lon, lang])
 
   console.log('items', items)
 
-
+  console.log('ERRORR', error)
 
 
   const setLan = (l) => setLang(l);
 
-  if (items.message) {
+  if (error) {
     return (
       <div className="container">
         <div className="row">
