@@ -5,6 +5,8 @@ import SearchPlace from "./SearchPlace";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner";
 import { Context } from "./Context";
+import { getForecast } from './api';
+import GetCoords from './GetCoords';
 
 function App() {
   const [error, setError] = useState();
@@ -13,8 +15,11 @@ function App() {
   const [position, setPosition] = useState({});
   const [lang, setLang] = useState("en");
 
-  const OPEN_WEATHER_MAP_API_KEY =
-    process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
+  const lat = GetCoords().position.latitude;
+  const lon = GetCoords().position.longitude;
+  console.log('COORDS', lat, lon)
+
+
 
   const searchPosition = (pos) => {
     if (pos) {
@@ -22,30 +27,16 @@ function App() {
     }
   };
 
-  useEffect((pos) => {
-    searchPosition(pos);
-  }, []);
 
-  const getForecast = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&lang=${lang}&units=metric&exclude={part}&appid=${OPEN_WEATHER_MAP_API_KEY}`;
-    await fetch(url)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-        },
-        (error) => {
-          console.log("message", error);
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  };
   useEffect(() => {
-    getForecast();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang, position]);
+    const forecast = getForecast(lat, lon, lang).then((res) => setItems(res.data));
+    console.log('getForecast', forecast)
+  }, [lat, lon, lang])
+
+  console.log('items', items)
+
+
+
 
   const setLan = (l) => setLang(l);
 
