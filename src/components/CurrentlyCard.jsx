@@ -6,12 +6,12 @@ function CurrentlyCard(props) {
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;
   const date = dateFormat(currently.dt, props.lang);
-  
+
   return (
     <div className="container mb-5 mt-5">
       <div className="card">
         <div className="card-body">
-          <p>Current Weather in {forecast.lat}</p>
+          <p>Current Weather in : {props.place}</p>
           <div className="">
             <div>
               {date} {Math.round(currently.temp)}

@@ -1,69 +1,103 @@
-import React, { useState } from "react";
-import { dateFormat } from "../utils";
-import WeatherIcon from "react-open-weather-icons";
-import HourlyCards from "./HourlyCards";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-function DailyCards(props) {
-  const { forecast } = props;
-  const daily = forecast.daily;
-  const [activeIndex, setActiveIndex] = useState(daily[0].dt);
- 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
   return (
-    <div className="container">
-      <p className="card-title">Daily Forecast</p>
-      <div className="nav nav-tabs row">
-        {daily.map((item) => {
-          const index = item.dt;
-          const isActive = index === activeIndex;
-          return (
-            <div
-              key={index}
-              className="nav-item col p-0 justify-content-center"
-            >
-              <>
-                <div
-                  className={`nav-link  ${isActive ? "active" : ""}`}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  <>
-                    {(
-                      <WeatherIcon
-                        name={item.weather[0].icon}
-                        className="w-70"
-                      />
-                    ) || (
-                      <img
-                        className="w-70"
-                        src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                        alt="альтернативный текст"
-                      />
-                    )}
-                  </>
-                  <div className="">
-                    <p className="text-center">
-                      {Math.round(item.temp.day) + "℃"}
-                    </p>
-                    <p className="text-center ">
-                      {dateFormat(item.dt, props.lang)}
-                    </p>
-                  </div>
-                </div>
-              </>
-            </div>
-          );
-        })}
-      </div>
-      <div className="">
-        <HourlyCards
-          forecast={props.forecast}
-          isLoaded={props.isLoaded}
-          error={props.error}
-          lang={props.lang}
-          active={activeIndex}
-        ></HourlyCards>
-      </div>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
   );
 }
 
-export default DailyCards;
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export default function ScrollableTabsButtonAuto() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example"
+        >
+          <Tab label="Item One" {...a11yProps(0)} />
+          <Tab label="Item Two" {...a11yProps(1)} />
+          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Item Four" {...a11yProps(3)} />
+          <Tab label="Item Five" {...a11yProps(4)} />
+          <Tab label="Item Six" {...a11yProps(5)} />
+          <Tab label="Item Seven" {...a11yProps(6)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        Item One
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Item Four
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        Item Five
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        Item Six
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        Item Seven
+      </TabPanel>
+    </div>
+  );
+}

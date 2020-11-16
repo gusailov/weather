@@ -6,13 +6,13 @@ import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 function HourlyCards(props) {
   const { forecast } = props;
   const hourly = forecast.hourly;
-  
+
   const day = new Date(props.active * 1000);
-  
+
   const filter = hourly.filter(
     (item) => new Date(item.dt * 1000).getDate() === day.getDate()
   );
- 
+
   const settings = {
     dots: false,
     infinite: false,
@@ -24,7 +24,7 @@ function HourlyCards(props) {
   };
 
   return (
-    <div className="tab-content">
+    <div className="">
       <p className="card-title">Hourly Forecast</p>
       <Slider {...settings}>
         {filter.map((item) => (

@@ -11,14 +11,15 @@ export default function Asynchronous(props) {
     const [result, seResult] = React.useState([]);
     const loading = open && options.length === 0;
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
+    console.log('Asynchronous CALL')
 
     const handleSelect = (address) => {
         console.log('address', address)
         setQuery(address);
         if (result.filter && address) {
-            const lat = result.filter((item) => item.display_name === address)[0].lat;
-            const lon = result.filter((item) => item.display_name === address)[0].lon;
-            let pos = { lat, lon }
+            const latitude = result.filter((item) => item.display_name === address)[0].lat;
+            const longitude = result.filter((item) => item.display_name === address)[0].lon;
+            let pos = { latitude, longitude }
             console.log('COORDSASYNC', pos)
             props.searchPosition(pos)
         }
