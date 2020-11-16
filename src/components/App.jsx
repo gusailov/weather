@@ -1,60 +1,68 @@
 import React, { useState, useEffect } from "react";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
-import SearchPlace from "./SearchPlace";
+//import SearchPlace from "./SearchPlace";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner";
 import { Context } from "./Context";
 import { getForecast, getPlaceByCoords } from './api';
-import GetCoords from './GetCoords';
-import items from "../forecastOpen.json";
+//import items from "../forecastOpen.json";
 import Button from '@material-ui/core/Button';
+import Asynchronous from "./Asynchronous";
+import { usePosition } from 'use-position';
 
 function App() {
   const [error, setError] = useState(undefined);
-  const [isLoaded, setIsLoaded] = useState(true);
-  // const [items, setItems] = useState([]);
-  const [position, setPosition] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+  const {
+    latitude,
+    longitude,
+
+  } = usePosition();
+  const [coords, setCoords] = useState({});
   const [lang, setLang] = useState("en");
 
-  const lat = GetCoords().position.latitude;
-  const lon = GetCoords().position.longitude;
-  console.log('COORDS', lat, lon)
 
-
-
-  const searchPosition = (pos) => {
-    if (pos) {
-      setPosition(pos);
-
-    }
-  };
-
-
-  // useEffect(() => {
-  //   if (lat && lon) {
-  //     const forecast = getForecast(lat, lon, lang).then((res) => { setItems(res.data); setIsLoaded(true); }, (error) => {
-  //       console.log("message", error);
-  //       setIsLoaded(true);
-  //       setError(error);
-  //     }
-  //     );
-  //     console.log('getForecast', forecast)
-
-  //   }
-
-  // }, [lat, lon, lang])
+  console.log('COORDS', coords)
 
   useEffect(() => {
-    if (lat && lon) {
-      const place = getPlaceByCoords(lat, lon).then((res) => { console.log('getPlaceByCoords', res.data.results[0].formatted) }
+    if (latitude && longitude) {
+      let pos = { latitude, longitude }
+      setCoords(pos);
+    }
+
+  }, [latitude, longitude]);
+
+  const searchPosition = (coords) => {
+    console.log('searchPosition', coords)
+    setCoords(coords);
+  }
+
+
+  useEffect(() => {
+    if (coords.latitude && coords.longitude) {
+      const forecast = getForecast(coords.latitude, coords.longitude, lang).then((res) => { setItems(res.data); setIsLoaded(true); }, (error) => {
+        console.log("message", error);
+        setIsLoaded(true);
+        setError(error);
+      }
       );
-      console.log('PLACE', place)
+      console.log('getForecast', forecast)
 
     }
 
-  }, [lat, lon, lang])
+  }, [coords, lang])
 
+  useEffect(() => {
+    if (coords.latitude && coords.longitude) {
+      const place = getPlaceByCoords(coords.latitude, coords.longitude, lang).then((res) => { console.log('getPlaceByCoords', res.data.results[0].formatted) }
+      );
+      console.log('PLACE', place)
+      console.log('PLACEcoords', coords)
+    }
+
+  }, [coords, lang])
 
 
 
@@ -64,10 +72,8 @@ function App() {
     return (
       <div className="container">
         <div className="row">
-          <SearchPlace
-            searchPosition={searchPosition}
-            position={position}
-          ></SearchPlace>
+          <Asynchronous searchPosition={searchPosition}></Asynchronous>
+
         </div>
         Помилка: {items.message}
       </div>
@@ -81,10 +87,8 @@ function App() {
           <div className="container row mt-2">
 
             <Switchlang></Switchlang>
-            <SearchPlace
-              searchPosition={searchPosition}
-              position={position}
-            ></SearchPlace>
+            <Asynchronous searchPosition={searchPosition}></Asynchronous>
+
           </div>
           <CurrentlyCard
             forecast={items}

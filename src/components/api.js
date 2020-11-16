@@ -10,8 +10,15 @@ export const getForecast = (lat, lon, lang) => {
 
 const OPEN_CAGE_GEOCODING_API_KEY =
   process.env.REACT_APP_OPEN_CAGE_GEOCODING_API_KEY;
-export const getPlaceByCoords = (lat, lon) => {
+export const getPlaceByCoords = (lat, lon, lang = "eng") => {
   return axios.get(
-    `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C+${lon}&key=${OPEN_CAGE_GEOCODING_API_KEY}&pretty=1`
+    `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${OPEN_CAGE_GEOCODING_API_KEY}&pretty=1&language=${lang}`
+  );
+};
+
+const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
+export const getCoordsByPlace = (query) => {
+  return axios.get(
+    `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=10`
   );
 };

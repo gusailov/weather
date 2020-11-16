@@ -1,53 +1,43 @@
-// *https://www.registers.service.gov.uk/registers/country/use-the-api*
 import fetch from "cross-fetch";
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-export default function Asynchronous() {
+export default function Asynchronous(props) {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
-    const [select, setSelect] = React.useState("");
     const [query, setQuery] = React.useState("");
     const [result, seResult] = React.useState([]);
-
     const loading = open && options.length === 0;
+    const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
 
-    React.useEffect(() => {
-        console.log("select", select);
-
-        if (result && select) {
-            console.log("result", result);
-            console.log(
-                "result FILTERED",
-                result.filter((item) => item.display_name === select),
-                result.filter((item) => item.display_name === select)[0].lat,
-                result.filter((item) => item.display_name === select)[0].lon
-            );
+    const handleSelect = (address) => {
+        console.log('address', address)
+        setQuery(address);
+        if (result.filter && address) {
+            const lat = result.filter((item) => item.display_name === address)[0].lat;
+            const lon = result.filter((item) => item.display_name === address)[0].lon;
+            let pos = { lat, lon }
+            console.log('COORDSASYNC', pos)
+            props.searchPosition(pos)
         }
-    }, [select, result]);
-    React.useEffect(() => {
-        console.log("query", query);
-    }, [query]);
+    };
 
     React.useEffect(() => {
 
         (async () => {
             const response = await fetch(
-                `https://api.locationiq.com/v1/autocomplete.php?key=pk.a4f67330ebe696ea8b4f97b0203144f2&q=${query}&limit=10`
+                `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=10`
             );
-            //await sleep(1e3); // For demo purposes.
             const countries = await response.json();
             seResult(countries);
-
-            console.log("countries", countries);
             if (countries.map) {
                 setOptions(countries.map((item) => item.display_name));
             }
         })();
 
-    }, [loading, query]);
+    }, [loading, query, LOCATIONIQ_API_KEY]);
 
     React.useEffect(() => {
         if (!open) {
@@ -66,7 +56,7 @@ export default function Asynchronous() {
             onClose={() => {
                 setOpen(false);
             }}
-            onChange={(event, value, reason) => setSelect(value)}
+            onChange={(event, value, reason) => handleSelect(value)}
             getOptionSelected={(option, value) => option.name === value.name}
             getOptionLabel={(option) => option}
             options={options}
@@ -74,7 +64,7 @@ export default function Asynchronous() {
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    label="Asynchronous"
+                    label="SEARCH"
                     variant="outlined"
                     onChange={(event) => setQuery(event.target.value)}
                     InputProps={{
