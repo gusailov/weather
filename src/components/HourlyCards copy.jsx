@@ -56,4 +56,4 @@ function HourlyCards(props) {
   );
 }
 
-export default HourlyCards;
+
