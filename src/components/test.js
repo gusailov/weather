@@ -90,3 +90,48 @@ export default function Asynchronous() {
     />
   );
 }
+
+return (
+  <Container maxWidth="sm">
+    <Grid container spacing={1}>
+      <Fade in={!checked}>
+        <SearchIcon
+          fontSize={"large"}
+          color={"disabled"}
+          onClick={() => {
+            setChecked(true);
+          }}
+        />
+      </Fade>
+      <Collapse in={checked}>
+        <Autocomplete
+          id="asynchronous-demo"
+          style={{ width: 300 }}
+          open={open}
+          onOpen={() => {
+            setOpen(true);
+            setChecked(true);
+          }}
+          onClose={() => {
+            setOpen(false);
+          }}
+          getOptionSelected={(option, value) => option.name === value.name}
+          getOptionLabel={(option) => option.name}
+          options={options}
+          loading={loading}
+          onBlur={() => {
+            setChecked(false);
+          }}
+          popupIcon={
+            loading ? <CircularProgress color="inherit" size={20} /> : null
+          }
+          renderInput={(params) =>
+            checked ? (
+              <TextField {...params} label="Asynchronous" variant="outlined" />
+            ) : null
+          }
+        />
+      </Collapse>
+    </Grid>
+  </Container>
+);
