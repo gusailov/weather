@@ -7,9 +7,7 @@ function HourlyCards(props) {
 
   const { forecast } = props.props;
   const hourly = forecast.hourly;
-  console.log(props.props.index)
   const day = new Date(props.props.index * 1000);
-  // console.log(hourly[0].dt)
   const filter = hourly.filter(
     (item) => new Date(item.dt * 1000).getDate() === day.getDate()
   );
@@ -26,7 +24,6 @@ function HourlyCards(props) {
 
   return (
     <div className="">
-      <p className="card-title">Hourly Forecast</p>
       <Slider {...settings}>
         {filter.map((item) => (
           <div key={item.dt} className="col sm">

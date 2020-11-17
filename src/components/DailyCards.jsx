@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TabPanel from './TabPanel';
+import DailyCard from './DailyCard';
 import { dateFormat } from "../utils";
 
 
@@ -37,7 +38,7 @@ export default function ScrollableTabsButtonAuto(props) {
     <div className={classes.root}>
 
       <AppBar position="static" color="default">
-
+        <p className="card-title">Daily Forecast</p>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -49,18 +50,25 @@ export default function ScrollableTabsButtonAuto(props) {
         >
           {daily.map((item) =>
 
-            <Tab key={item.dt} value={item.dt} icon={dateFormat(item.dt, props.lang)} {...a11yProps(0)} />
+            <Tab key={item.dt} value={item.dt} label={<p >
+              {<DailyCard forecast={forecast} index={item.dt} />}
+
+            </p>}
+
+              icon={dateFormat(item.dt, props.lang)} {...a11yProps(0)} />
 
           )}
 
         </Tabs>
       </AppBar>
-      {daily.map((item) => <TabPanel forecast={forecast} key={item.dt} value={value} index={item.dt}>
-        {dateFormat(item.dt, props.lang)}
-      </TabPanel>)}
+      {
+        daily.map((item) => <TabPanel variant="scrollable" forecast={forecast} key={item.dt} value={value} index={item.dt}>
+          {dateFormat(item.dt, props.lang)}
+        </TabPanel>)
+      }
 
 
 
-    </div>
+    </div >
   );
 }
