@@ -1,15 +1,17 @@
 import React from "react";
-import { dateFormat } from "../utils";
 import WeatherIcon from "react-open-weather-icons";
+import { dateFormatHourly } from "../utils";
 import { Grid } from "@material-ui/core";
+import OpacityIcon from '@material-ui/icons/Opacity';
 
 
-function DailyCard(props) {
+function HourlyCard(props) {
   const { forecast, lang } = props;
 
   return (
 
     <Grid container direction={'column'} spacing={2}>
+
       <Grid item xs={4} >
         {(<img
           src={`http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
@@ -23,19 +25,21 @@ function DailyCard(props) {
       </Grid>
 
       <Grid item  >
-        <p>{Math.round(forecast.temp.day) + "℃"}</p>
+        {Math.round(forecast.temp) + "℃"}
 
-        {dateFormat(forecast.dt, lang)}
       </Grid>
       <Grid item  >
-        Morning - {Math.round(forecast.temp.morn) + "℃"}
+        {dateFormatHourly(forecast.dt, lang)}
+
       </Grid>
       <Grid item  >
-        Evening - {Math.round(forecast.temp.eve) + "℃"}
+        {"WindSpeed -" + Math.round(forecast.wind_speed) + "m/s"}
+      </Grid>
+      <Grid item  >
+        <OpacityIcon />{+ (forecast.rain ? forecast.rain['1h'] : "0") + " mm"}
       </Grid>
     </Grid>
-
   );
 }
 
-export default DailyCard;
+export default HourlyCard;

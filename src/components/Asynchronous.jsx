@@ -3,6 +3,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import SearchIcon from "@material-ui/icons/Search";
+import Fade from "@material-ui/core/Fade";
 
 export default function Asynchronous(props) {
     const [open, setOpen] = React.useState(false);
@@ -10,7 +12,7 @@ export default function Asynchronous(props) {
     const [query, setQuery] = React.useState("");
     const [result, seResult] = React.useState([]);
     const loading = open && options.length === 0;
-    const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
+    const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API;
     console.log('Asynchronous CALL')
 
     const handleSelect = (address) => {
@@ -45,9 +47,13 @@ export default function Asynchronous(props) {
             setOptions([]);
         }
     }, [open]);
-
+    const [checked, setChecked] = React.useState(false);
+    const handleChange = () => {
+        setChecked((prev) => !prev);
+    };
     return (
         <Autocomplete
+            size='small'
             id="asynchronous-demo"
             style={{ width: 300 }}
             open={open}
@@ -62,24 +68,20 @@ export default function Asynchronous(props) {
             getOptionLabel={(option) => option}
             options={options}
             loading={loading}
+            popupIcon={
+                <React.Fragment>
+                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                    <Fade in={!checked}>
+                        <SearchIcon
+                            onClick={() => {
+                                setChecked(true);
+                            }}
+                        />
+                    </Fade>
+                </React.Fragment>
+            }
             renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label="SEARCH"
-                    variant="outlined"
-                    onChange={(event) => setQuery(event.target.value)}
-                    InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                            <React.Fragment>
-                                {loading ? (
-                                    <CircularProgress color="inherit" size={20} />
-                                ) : null}
-                                {params.InputProps.endAdornment}
-                            </React.Fragment>
-                        )
-                    }}
-                />
+                <TextField  {...params} label="Asynchronous" variant="outlined" />
             )}
         />
     );

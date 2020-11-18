@@ -4,12 +4,15 @@ import DailyCards from "./DailyCards";
 //import SearchPlace from "./SearchPlace";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner";
+import { Grid, Container, Divider } from "@material-ui/core";
 import { Context } from "./Context";
 import { getForecast, getPlaceByCoords } from './api';
 import items from "../forecastOpen.json";
 import Button from '@material-ui/core/Button';
 import Asynchronous from "./Asynchronous";
 import { usePosition } from 'use-position';
+import HourlyCards from "./HourlyCards";
+import { makeStyles } from '@material-ui/core/styles';
 
 function App() {
   const [error, setError] = useState(undefined);
@@ -23,7 +26,14 @@ function App() {
   const [coords, setCoords] = useState({});
   const [lang, setLang] = useState("en");
   const [place, setPlace] = useState("place");
-
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      width: '100%',
+      marginTop: 5
+    },
+  }));
+  const classes = useStyles();
 
   console.log('COORDS', coords)
 
@@ -83,29 +93,52 @@ function App() {
     return <Spinner></Spinner>;
   } else {
     return (
+
       <Context.Provider value={{ setLan }}>
-        <div className="container">
-          <div className="container row mt-2">
+        <Container maxWidth="lg" disableGutters >
 
-            <Switchlang></Switchlang>
+          <Grid container direction={'column'} className={classes.root} spacing={2}  >
 
+            <Grid item xs={12} >
+              <Grid container direction={'row'} wrap='wrap' justify='center'>
+                <Grid item xs={2} >
+                  <Switchlang />
+                </Grid>
+                <Grid item xs={8} >
+                  <Asynchronous />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Divider variant="middle" />
+            <Grid item xs={12} >
+              <CurrentlyCard
+                forecast={items}
+                isLoaded={isLoaded}
+                error={error}
+                lang={lang}
+                place={place}
+              />
+            </Grid>
+            <Divider variant="middle" />
+            <Grid item xs={12} >
+              <DailyCards
+                forecast={items}
+                isLoaded={isLoaded}
+                error={error}
+                lang={lang}
+              />
+            </Grid>
+            <Divider variant="middle" />
+            <Grid item xs={12} >
+              <HourlyCards forecast={items}
+                isLoaded={isLoaded}
+                error={error}
+                lang={lang} />
+            </Grid>
 
-          </div>
-          <CurrentlyCard
-            forecast={items}
-            isLoaded={isLoaded}
-            error={error}
-            lang={lang}
-            place={place}
-          ></CurrentlyCard>
-          <DailyCards
-            forecast={items}
-            isLoaded={isLoaded}
-            error={error}
-            lang={lang}
-          ></DailyCards>
-        </div>
-      </Context.Provider>
+          </Grid></Container>
+      </Context.Provider >
+
     );
   }
 }

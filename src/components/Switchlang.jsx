@@ -3,7 +3,7 @@ import { Context } from "./Context";
 
 function Switchlang() {
   const { setLan } = useContext(Context);
- 
+
   return (
     <div className="mr-5 ml-3">
       <select
@@ -12,8 +12,8 @@ function Switchlang() {
         }}
         className="custom-select"
       >
-        <option value="en">English</option>
-        <option value="uk">Ukrainian</option>
+        <option value="en">ENG</option>
+        <option value="uk">UKR</option>
       </select>
     </div>
   );
