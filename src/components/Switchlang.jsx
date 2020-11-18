@@ -5,7 +5,7 @@ function Switchlang() {
   const { setLan } = useContext(Context);
 
   return (
-    <div className="mr-5 ml-3">
+    <div >
       <select
         onChange={(e) => {
           setLan(e.target.value);

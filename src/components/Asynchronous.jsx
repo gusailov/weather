@@ -52,13 +52,14 @@ export default function Asynchronous(props) {
         setChecked((prev) => !prev);
     };
     return (
+
         <Autocomplete
             size='small'
             id="asynchronous-demo"
-            style={{ width: 300 }}
             open={open}
             onOpen={() => {
                 setOpen(true);
+                setChecked(true);
             }}
             onClose={() => {
                 setOpen(false);
@@ -68,6 +69,9 @@ export default function Asynchronous(props) {
             getOptionLabel={(option) => option}
             options={options}
             loading={loading}
+            onBlur={() => {
+                setChecked(false);
+            }}
             popupIcon={
                 <React.Fragment>
                     {loading ? <CircularProgress color="inherit" size={20} /> : null}
@@ -81,8 +85,9 @@ export default function Asynchronous(props) {
                 </React.Fragment>
             }
             renderInput={(params) => (
-                <TextField  {...params} label="Asynchronous" variant="outlined" />
+                <TextField  {...params} label="SEARCH" variant="outlined" />
             )}
         />
+
     );
 }
