@@ -1,10 +1,10 @@
 import fetch from "cross-fetch";
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import { TextField, CircularProgress, Fade } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import CircularProgress from "@material-ui/core/CircularProgress";
+//import CircularProgress from "@material-ui/core/CircularProgress";
 import SearchIcon from "@material-ui/icons/Search";
-import Fade from "@material-ui/core/Fade";
+//import Fade from "@material-ui/core/Fade";
 
 export default function Asynchronous(props) {
     const [open, setOpen] = React.useState(false);

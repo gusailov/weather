@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     width: '100%',
   },
+  indicator: {
+    opacity: 0,
+  },
 }));
 function HourlyCards(props) {
   const { forecast, lang } = props;
@@ -42,11 +45,13 @@ function HourlyCards(props) {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
-
+        classes={{
+          indicator: classes.indicator
+        }}
       >
         {hourly.map((item) =>
 
-          <Tab key={item.dt} value={item.dt} label=
+          <Tab disabled key={item.dt} value={item.dt} label=
             {< HourlyCard lang={lang} forecast={item} index={item.dt} />}
 
             icon={dateFormatHourly(item.dt, lang)} {...a11yProps(0)}

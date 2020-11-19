@@ -1,20 +1,60 @@
 import React, { useContext } from "react";
 import { Context } from "./Context";
+import { FormControl, Select, MenuItem, InputBase, NativeSelect } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    "label + &": {
+      marginTop: theme.spacing(3)
+    }
+  },
+  input: {
+    borderRadius: 4,
+    position: "relative",
+    backgroundColor: theme.palette.background.paper,
+    border: "1px solid #ced4da",
+    fontSize: 16,
+    padding: "10px 26px 10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"'
+    ].join(","),
+    "&:focus": {
+      borderRadius: 4,
+      borderColor: "#80bdff",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+    }
+  }
+}))(InputBase);
 
 function Switchlang() {
-  const { setLan } = useContext(Context);
 
+  const { setLan } = useContext(Context);
   return (
     <div >
-      <select
-        onChange={(e) => {
-          setLan(e.target.value);
-        }}
-        className="custom-select"
-      >
-        <option value="en">ENG</option>
-        <option value="uk">UKR</option>
-      </select>
+      <FormControl >
+        <NativeSelect
+          id="demo-customized-select-native"
+          onChange={(e) => {
+            setLan(e.target.value);
+          }}
+          input={<BootstrapInput />}
+        >
+          <option value={"en"}>ENG</option>
+          <option value={"uk"}>UKR</option>
+        </NativeSelect>
+      </FormControl>
     </div>
   );
 }

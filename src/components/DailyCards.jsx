@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     width: '100%',
   },
+  indicator: {
+    opacity: 0,
+  },
 }));
 
 export default function DailyCards(props) {
@@ -44,11 +47,13 @@ export default function DailyCards(props) {
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
-
+        classes={{
+          indicator: classes.indicator
+        }}
       >
         {daily.map((item) =>
 
-          <Tab key={item.dt} value={item.dt} label=
+          <Tab disabled key={item.dt} value={item.dt} label=
             {< DailyCard lang={lang} forecast={item} index={item.dt} />}
 
             icon={dateFormat(item.dt, props.lang)} {...a11yProps(0)}
