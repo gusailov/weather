@@ -21,8 +21,9 @@ function Switchlang() {
           defaultValue={"en"}
 
         >
-          <MenuItem value={"en"}>ENG</MenuItem>
-          <MenuItem value={"uk"}>UKR</MenuItem>
+          <MenuItem value={"en"}>EN</MenuItem>
+          <MenuItem value={"uk"}>UA</MenuItem>
+          <MenuItem value={"ru"}>RU</MenuItem>
         </Select>
       </FormControl>
     </div>

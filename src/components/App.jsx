@@ -3,6 +3,7 @@ import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner";
+import Spin from './Spin'
 import { Grid, Container, Divider } from "@material-ui/core";
 import { Context } from "./Context";
 import { getForecast, getPlaceByCoords } from './api';
@@ -81,13 +82,13 @@ function App() {
       </div>
     );
   } else if (!isLoaded || items.length === 0) {
-    return <Spinner></Spinner>;
+    return <Spin />;
+
   } else {
     return (
       <Context.Provider value={{ setLan }}>
         <Container maxWidth="lg"  >
           <Grid container direction={'column'} className={classes.root} spacing={2}  >
-
             <Grid item xs={12} >
               <Grid container direction={'row'} wrap='wrap' justify='space-between'>
                 <Grid item xs={3} sm={1} >
@@ -99,7 +100,6 @@ function App() {
               </Grid>
             </Grid>
             <Grid item xs={12} ><Divider variant='fullWidth' /></Grid>
-
             <Grid item xs={12} >
               <CurrentlyCard
                 forecast={items}
