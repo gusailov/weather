@@ -100,8 +100,8 @@ function App() {
           <Grid container direction={'column'} className={classes.root} spacing={2}  >
 
             <Grid item xs={12} >
-              <Grid container direction={'row'} wrap='wrap' justify='space-around'>
-                <Grid item xs={3} sm={1} md={1}>
+              <Grid container direction={'row'} wrap='wrap' justify='space-between'>
+                <Grid item xs={3} sm={1} >
                   <Switchlang />
                 </Grid>
                 <Grid item xs={7} >
