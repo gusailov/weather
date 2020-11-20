@@ -13,16 +13,21 @@ export default function Asynchronous(props) {
     const [result, seResult] = React.useState([]);
     const loading = open && options.length === 0;
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
-    console.log('Asynchronous CALL')
+    //console.log('Asynchronous CALL')
+
 
     const handleSelect = (address) => {
-
+        //const Asynchronous = result.filter((item) => item.display_name === address)
+        // console.log('Asynchronous CALL result', result.filter((item) => item.display_name === address).display_place)
         setQuery(address);
         if (result.filter && address) {
+            const Asynchronous = result.filter((item) => item.display_name === address)
+            console.log('Asynchronous CALL result', Asynchronous[0])
+
             const latitude = result.filter((item) => item.display_name === address)[0].lat;
             const longitude = result.filter((item) => item.display_name === address)[0].lon;
             let pos = { latitude, longitude }
-            props.searchPosition(pos)
+            props.searchPosition(pos, Asynchronous[0].display_place)
         }
     };
 
@@ -30,7 +35,7 @@ export default function Asynchronous(props) {
 
         (async () => {
             const response = await fetch(
-                `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=10`
+                `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=20&dedupe=1`
             );
             const countries = await response.json();
             seResult(countries);
