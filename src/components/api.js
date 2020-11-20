@@ -10,9 +10,9 @@ export const getForecast = (lat, lon, lang) => {
 
 const OPEN_CAGE_GEOCODING_API_KEY =
   process.env.REACT_APP_OPEN_CAGE_GEOCODING_API_KEY;
-export const getPlaceByCoords = (lat, lon, lang = "eng") => {
+export const getPlaceByCoords = (lat, lon, lang) => {
   return axios.get(
-    `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${OPEN_CAGE_GEOCODING_API_KEY}&pretty=1&language=${lang}`
+    `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${OPEN_CAGE_GEOCODING_API_KEY}&language=${lang}&pretty=1`
   );
 };
 

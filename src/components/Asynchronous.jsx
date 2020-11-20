@@ -12,7 +12,7 @@ export default function Asynchronous(props) {
     const [query, setQuery] = React.useState("");
     const [result, seResult] = React.useState([]);
     const loading = open && options.length === 0;
-    const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API;
+    const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
     console.log('Asynchronous CALL')
 
     const handleSelect = (address) => {

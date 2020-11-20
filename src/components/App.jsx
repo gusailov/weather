@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
-//import SearchPlace from "./SearchPlace";
 import Switchlang from "./Switchlang";
 import Spinner from "./Spinner";
 import { Grid, Container, Divider } from "@material-ui/core";
 import { Context } from "./Context";
 import { getForecast, getPlaceByCoords } from './api';
-import items from "../forecastOpen.json";
-import Button from '@material-ui/core/Button';
 import Asynchronous from "./Asynchronous";
 import { usePosition } from 'use-position';
 import HourlyCards from "./HourlyCards";
 import { makeStyles } from '@material-ui/core/styles';
+//import items from "../forecastOpen.json";
 
 function App() {
   const [error, setError] = useState(undefined);
   const [isLoaded, setIsLoaded] = useState(true);
-  //const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
   const {
     latitude,
     longitude,
@@ -51,30 +49,26 @@ function App() {
   }
 
 
-  // useEffect(() => {
-  //   console.log('ForecastCOORDS', coords)
-  //   if (coords.latitude && coords.longitude) {
-  //     console.log('ForecastCOORDS', coords)
-  //     getForecast(coords.latitude, coords.longitude, lang)
-  //       .then((res) => { console.log('FORECAST', res.data); setItems(res.data); setIsLoaded(true) },
-  //         (error) => {
-  //           console.log("message", error);
-  //           setIsLoaded(true);
-  //           setError(error);
-  //         }
-  //       );
-  //   }
-  // }, [coords, lang])
+  useEffect(() => {
+    if (coords.latitude && coords.longitude) {
 
-  // useEffect(() => {
-  //   console.log('getPlaceByCoords', coords)
-  //   if (coords.latitude && coords.longitude) {
-  //     getPlaceByCoords(coords.latitude, coords.longitude, lang).then((res) => { setPlace(res.data.results[0].formatted) }
-  //     );
-  //   }
+      getForecast(coords.latitude, coords.longitude, lang)
+        .then((res) => { setItems(res.data); setIsLoaded(true) },
+          (error) => {
+            console.log("message", error);
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+    }
+    console.log('getPlaceByCoords', coords)
+    if (coords.latitude && coords.longitude) {
+      getPlaceByCoords(coords.latitude, coords.longitude, lang).then((res) => { setPlace(res.data.results[0].formatted) }
+      );
+    }
+  }, [coords, lang])
 
-  // }, [coords, lang])
-  // <Asynchronous searchPosition={searchPosition}></Asynchronous>
+
 
 
   const setLan = (l) => setLang(l);
@@ -83,8 +77,6 @@ function App() {
     return (
       <div className="container">
         <div className="row">
-
-
         </div>
         Помилка: {items.message}
       </div>
@@ -93,10 +85,8 @@ function App() {
     return <Spinner></Spinner>;
   } else {
     return (
-
       <Context.Provider value={{ setLan }}>
         <Container maxWidth="lg"  >
-
           <Grid container direction={'column'} className={classes.root} spacing={2}  >
 
             <Grid item xs={12} >
@@ -105,7 +95,7 @@ function App() {
                   <Switchlang />
                 </Grid>
                 <Grid item xs={7} >
-                  <Asynchronous />
+                  <Asynchronous searchPosition={searchPosition} />
                 </Grid>
               </Grid>
             </Grid>

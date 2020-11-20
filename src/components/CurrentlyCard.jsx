@@ -9,7 +9,7 @@ function CurrentlyCard(props) {
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;
   const date = dateFormat(currently.dt, props.lang);
-  console.log(currently)
+
   return (
     <Paper elevation={2} >
       <Grid container direction='column' spacing={2} >
