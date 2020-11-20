@@ -44,7 +44,6 @@ function App() {
   }, [latitude, longitude]);
 
   const searchPosition = (coords) => {
-    console.log('searchPosition', coords)
     setCoords(coords);
   }
 
@@ -61,7 +60,7 @@ function App() {
           }
         );
     }
-    console.log('getPlaceByCoords', coords)
+
     if (coords.latitude && coords.longitude) {
       getPlaceByCoords(coords.latitude, coords.longitude, lang).then((res) => { setPlace(res.data.results[0].formatted) }
       );

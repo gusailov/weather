@@ -1,5 +1,4 @@
 import React from "react";
-import { dateFormatHourly } from "../utils";
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
 import HourlyCard from './HourlyCard';

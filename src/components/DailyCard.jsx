@@ -1,7 +1,7 @@
 import React from "react";
 import { dateFormat } from "../utils";
 import WeatherIcon from "react-open-weather-icons";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,13 +24,13 @@ function DailyCard(props) {
         ) || (
             <WeatherIcon
               name={forecast.weather[0].icon}
-              className="w-70"
             />)}
       </Grid>
-
+      <Grid item  >
+        {forecast.weather[0].description}
+      </Grid>
       <Grid item  >
         <p>{Math.round(forecast.temp.day) + "℃"}</p>
-
         {dateFormat(forecast.dt, lang)}
       </Grid>
       <Grid item  >

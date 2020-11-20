@@ -1,7 +1,7 @@
 import React from "react";
 import WeatherIcon from "react-open-weather-icons";
 import { dateFormatHourly } from "../utils";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import OpacityIcon from '@material-ui/icons/Opacity';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -26,7 +26,6 @@ function HourlyCard(props) {
         ) || (
             <WeatherIcon
               name={forecast.weather[0].icon}
-              className="w-70"
             />)}
       </Grid>
 

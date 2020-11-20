@@ -16,13 +16,12 @@ export default function Asynchronous(props) {
     console.log('Asynchronous CALL')
 
     const handleSelect = (address) => {
-        console.log('address', address)
+
         setQuery(address);
         if (result.filter && address) {
             const latitude = result.filter((item) => item.display_name === address)[0].lat;
             const longitude = result.filter((item) => item.display_name === address)[0].lon;
             let pos = { latitude, longitude }
-            console.log('COORDSASYNC', pos)
             props.searchPosition(pos)
         }
     };
@@ -48,9 +47,7 @@ export default function Asynchronous(props) {
         }
     }, [open]);
     const [checked, setChecked] = React.useState(false);
-    const handleChange = () => {
-        setChecked((prev) => !prev);
-    };
+
     return (
 
         <Autocomplete
@@ -85,7 +82,7 @@ export default function Asynchronous(props) {
                 </React.Fragment>
             }
             renderInput={(params) => (
-                <TextField  {...params} label="SEARCH" variant="outlined" />
+                <TextField  {...params} label="SEARCH" variant="outlined" onChange={(event) => setQuery(event.target.value)} />
             )}
         />
 
