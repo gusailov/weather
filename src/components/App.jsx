@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import CurrentlyCard from "./CurrentlyCard";
 import DailyCards from "./DailyCards";
 import Switchlang from "./Switchlang";
-import Spinner from "./Spinner";
-import Spin from './Spin'
+import Spinner from './Spinner'
 import { Grid, Container, Divider } from "@material-ui/core";
 import { Context } from "./Context";
 import { getForecast, getPlaceByCoords } from './api';
@@ -82,7 +81,7 @@ function App() {
       </div>
     );
   } else if (!isLoaded || items.length === 0) {
-    return <Spin />;
+    return <Spinner />;
 
   } else {
     return (
