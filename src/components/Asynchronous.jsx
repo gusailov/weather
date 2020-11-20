@@ -13,12 +13,8 @@ export default function Asynchronous(props) {
     const [result, seResult] = React.useState([]);
     const loading = open && options.length === 0;
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
-    //console.log('Asynchronous CALL')
-
 
     const handleSelect = (address) => {
-        //const Asynchronous = result.filter((item) => item.display_name === address)
-        // console.log('Asynchronous CALL result', result.filter((item) => item.display_name === address).display_place)
         setQuery(address);
         if (result.filter && address) {
             const Asynchronous = result.filter((item) => item.display_name === address)
@@ -57,7 +53,7 @@ export default function Asynchronous(props) {
 
         <Autocomplete
             size='small'
-            id="asynchronous-demo"
+            id="asynchronous"
             open={open}
             onOpen={() => {
                 setOpen(true);
