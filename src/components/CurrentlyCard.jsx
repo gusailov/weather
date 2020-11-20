@@ -1,51 +1,76 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
-import { dateFormat } from "../utils";
+import { Grid, Paper, Typography } from "@material-ui/core";
+import { dateFormat, dateFormatTime } from "../utils";
+import { WeatherSunsetUp, WeatherSunsetDown } from 'mdi-material-ui'
+
 
 function CurrentlyCard(props) {
   const { forecast } = props;
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;
   const date = dateFormat(currently.dt, props.lang);
-
+  console.log(currently)
   return (
-    <Grid container direction={'column'} spacing={2}>
+    <Paper elevation={2} >
+      <Grid container direction='column' spacing={2} >
+        <Grid item xs={12} >
+          <Typography variant="button" component="p">
+            Current Weather in : {props.place}
+          </Typography>
+          <Typography variant="button" component="p">
+            {date}
+          </Typography></Grid >
+        <Grid item xs={12} >
+          <Grid container spacing={2} >
+            <Grid item xs={7} >
+              <Grid container spacing={2} direction='column' alignItems='center'>
 
+                <Grid item >
+                  <WeatherSunsetUp fontSize='large' />
+                  <Typography variant="button" component="p">
+                    {dateFormatTime(currently.sunrise, props.lang)}
+                  </Typography>
+                </Grid >
+                <Grid item >
+                  <WeatherSunsetDown fontSize='large' />
+                  <Typography variant="button" component="p">
+                    {dateFormatTime(currently.sunset, props.lang)}
+                  </Typography>
+                </Grid >
+                <Grid item >
+                  <Typography variant="button" component="p">
+                    {currently.weather[0].description}
+                  </Typography>
+                  <Typography variant="button" component="p">
+                    {"WindSpeed -" + Math.round(currently.wind_speed) + "m/s"}
+                  </Typography>
+                  <Typography variant="button" component="p">
+                    {"Feels like -" + Math.round(currently.feels_like)}&deg;C
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
 
-      <div className="card-body">
-        <p>Current Weather in : {props.place}</p>
-        <div className="">
-          <div>
-            {date} {Math.round(currently.temp)}
-            <span>&deg;C</span>
-          </div>
-          <span
-            className="glyphicon glyphicon-search"
-            aria-hidden="true"
-          ></span>
-        </div>
-        <div className="row">
-          <img
-            src={"http://openweathermap.org/img/wn/" + iconName + "@2x.png"}
-            alt="альтернативный текст"
-          />
-        </div>
-        <div className="card-title blue-text text-darken-2 center-align col">
-          {currently.weather[0].description}
-        </div>
-        <div className="card-content col s12">
-          <div className="">
-            {"WindSpeed -" + Math.round(currently.wind_speed) + "m/s"}
-          </div>
-          <div className="col s2">
-            {"Feels like -" + Math.round(currently.feels_like)}
-            <span>&deg;C</span>
-          </div>
-        </div>
-      </div>
+            <Grid item xs={5} >
+              <Grid container direction='column' alignItems='center' >
 
-
-    </Grid>
+                <Grid item xs={10}>
+                  <img
+                    src={"http://openweathermap.org/img/wn/" + iconName + "@2x.png"}
+                    alt={iconName}
+                  />
+                </Grid>
+                <Grid item xs={2} >
+                  <Typography variant="button" component="p">
+                    {Math.round(currently.temp)}&deg;C
+               </Typography>
+                </Grid>
+              </Grid>
+            </Grid >
+          </Grid >
+        </Grid >
+      </Grid >
+    </Paper >
   );
 }
 

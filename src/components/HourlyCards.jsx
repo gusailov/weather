@@ -1,8 +1,7 @@
 import React from "react";
 import { dateFormatHourly } from "../utils";
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
 import HourlyCard from './HourlyCard';
 
 
@@ -22,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   indicator: {
     opacity: 0,
   },
+  disabled: {
+    color: 'red',
+  },
 }));
 function HourlyCards(props) {
   const { forecast, lang } = props;
@@ -35,31 +37,39 @@ function HourlyCards(props) {
   };
 
   return (
+
     <div className={classes.root}>
-      <p className="card-title">Hourly Forecast</p>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable auto tabs example"
-        classes={{
-          indicator: classes.indicator
-        }}
-      >
-        {hourly.map((item) =>
+      <Paper elevation={2} >
+        <Typography variant="button" component="p">
+          Hourly Forecast
+</Typography>
 
-          <Tab disabled key={item.dt} value={item.dt} label=
-            {< HourlyCard lang={lang} forecast={item} index={item.dt} />}
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example"
+          classes={{
+            indicator: classes.indicator,
 
-            icon={dateFormatHourly(item.dt, lang)} {...a11yProps(0)}
-          />
-        )}
+          }}
+        >
+          {hourly.map((item) =>
 
-      </Tabs>
+            <Tab disabled key={item.dt} value={item.dt} label=
+              {< HourlyCard lang={lang} forecast={item} index={item.dt} />}
+
+              {...a11yProps(0)}
+            />
+          )}
+
+        </Tabs>
+      </Paper>
     </div >
+
   );
 }
 

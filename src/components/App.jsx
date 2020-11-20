@@ -95,7 +95,7 @@ function App() {
     return (
 
       <Context.Provider value={{ setLan }}>
-        <Container maxWidth="lg" disableGutters >
+        <Container maxWidth="lg"  >
 
           <Grid container direction={'column'} className={classes.root} spacing={2}  >
 
@@ -109,7 +109,8 @@ function App() {
                 </Grid>
               </Grid>
             </Grid>
-            <Divider variant="middle" />
+            <Grid item xs={12} ><Divider variant='fullWidth' /></Grid>
+
             <Grid item xs={12} >
               <CurrentlyCard
                 forecast={items}
@@ -119,7 +120,7 @@ function App() {
                 place={place}
               />
             </Grid>
-            <Divider variant="middle" />
+            <Grid item xs={12} ><Divider variant='fullWidth' /></Grid>
             <Grid item xs={12} >
               <DailyCards
                 forecast={items}
@@ -128,7 +129,7 @@ function App() {
                 lang={lang}
               />
             </Grid>
-            <Divider variant="middle" />
+            <Grid item xs={12} ><Divider variant='fullWidth' /></Grid>
             <Grid item xs={12} >
               <HourlyCards forecast={items}
                 isLoaded={isLoaded}

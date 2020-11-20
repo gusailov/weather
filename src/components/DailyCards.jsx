@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
 import DailyCard from './DailyCard';
 import { dateFormat } from "../utils";
 
@@ -38,32 +37,35 @@ export default function DailyCards(props) {
 
   return (
     <div className={classes.root}>
-      <p className="card-title">Daily Forecast</p>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable auto tabs example"
-        classes={{
-          indicator: classes.indicator
-        }}
-      >
-        {daily.map((item) =>
+      <Paper elevation={2} >
+        <Typography gutterBottom={true} variant="button" component="p">
+          Daily Forecast
+</Typography>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons='desktop'
+          aria-label="scrollable auto tabs example"
+          classes={{
+            indicator: classes.indicator
+          }}
+        >
+          {daily.map((item) =>
 
-          <Tab disabled key={item.dt} value={item.dt} label=
-            {< DailyCard lang={lang} forecast={item} index={item.dt} />}
+            <Tab disabled key={item.dt} value={item.dt} label=
+              {< DailyCard lang={lang} forecast={item} index={item.dt} />}
+              {...a11yProps(0)}
 
-            icon={dateFormat(item.dt, props.lang)} {...a11yProps(0)}
 
+            />
 
-          />
+          )}
 
-        )}
-
-      </Tabs>
+        </Tabs>
+      </Paper>
     </div >
   );
 }
