@@ -30,7 +30,7 @@ export default function Asynchronous(props) {
     };
 
     React.useEffect(() => {
-        console.log('query', debouncedQuery);
+
         if (debouncedQuery) {
             (async () => {
                 const response = await fetch(

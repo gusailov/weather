@@ -52,10 +52,7 @@ export default function DailyCards(props) {
           {daily.map((item) =>
             <Tab disabled key={item.dt} value={item.dt} label=
               {< DailyCard lang={lang} value={item.dt} forecast={item} index={item.dt} />}
-              {...a11yProps(0)}
-
-
-            />,
+              {...a11yProps(0)} />
 
           )}
 
