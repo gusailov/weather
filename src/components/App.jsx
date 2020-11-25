@@ -10,6 +10,7 @@ import Asynchronous from "./Asynchronous";
 import { usePosition } from 'use-position';
 import HourlyCards from "./HourlyCards";
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 //import items from "../forecastOpen.json";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
     },
   }));
   const classes = useStyles();
+  const { i18n } = useTranslation();
 
   console.log('COORDS', coords)
 
@@ -65,7 +67,8 @@ function App() {
       getPlaceByCoords(coords.latitude, coords.longitude, lang).then((res) => { setPlace(res.data.results[0].formatted) }
       );
     }
-  }, [coords, lang])
+    i18n.changeLanguage(lang)
+  }, [coords, lang, i18n])
 
 
 

@@ -4,6 +4,7 @@ import { dateFormatHourly } from "../utils";
 import { Grid } from "@material-ui/core";
 import OpacityIcon from '@material-ui/icons/Opacity';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 function HourlyCard(props) {
   const { forecast, lang } = props;
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <Grid classes={{ root: classes.root }} container direction={'column'} spacing={2}>
@@ -39,7 +41,8 @@ function HourlyCard(props) {
 
       </Grid>
       <Grid item  >
-        {"WindSpeed :" + Math.round(forecast.wind_speed) + "m/s"}
+
+        {t('WIND')} : {Math.round(forecast.wind_speed)}  {t('m/s')}
       </Grid>
       <Grid item  >
         <OpacityIcon />{+ (forecast.rain ? forecast.rain['1h'] : "0") + " mm"}

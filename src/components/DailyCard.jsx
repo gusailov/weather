@@ -3,6 +3,7 @@ import { dateFormat } from "../utils";
 import WeatherIcon from "react-open-weather-icons";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
 function DailyCard(props) {
   const { forecast, lang } = props;
   const classes = useStyles();
+  const { t } = useTranslation();
   return (
 
     <Grid classes={{ root: classes.root }} container direction={'column'} spacing={2}>
@@ -34,10 +36,10 @@ function DailyCard(props) {
         {dateFormat(forecast.dt, lang)}
       </Grid>
       <Grid item  >
-        Morning : {Math.round(forecast.temp.morn) + "℃"}
+        {t('Morning')} : {Math.round(forecast.temp.morn) + "℃"}
       </Grid>
       <Grid item  >
-        Evening : {Math.round(forecast.temp.eve) + "℃"}
+        {t('Evening')} : {Math.round(forecast.temp.eve) + "℃"}
       </Grid>
 
     </Grid>

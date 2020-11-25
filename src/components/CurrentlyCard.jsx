@@ -2,6 +2,8 @@ import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { dateFormat, dateFormatTime } from "../utils";
 import { WeatherSunsetUp, WeatherSunsetDown } from 'mdi-material-ui'
+import { useTranslation } from 'react-i18next';
+
 
 
 function CurrentlyCard(props) {
@@ -9,13 +11,15 @@ function CurrentlyCard(props) {
   const iconName = forecast.current.weather[0].icon;
   const currently = forecast.current;
   const date = dateFormat(currently.dt, props.lang);
+  const { t } = useTranslation();
 
   return (
     <Paper elevation={2} >
       <Grid container style={{ padding: '1rem' }} direction='column'  >
         <Grid item xs={12} >
           <Typography variant="button" component="p">
-            Current Weather
+            {t('Current Weather')}
+
           </Typography>
           <Typography variant="button" component="p">
             {props.place}
@@ -45,10 +49,10 @@ function CurrentlyCard(props) {
                     {currently.weather[0].description}
                   </Typography>
                   <Typography variant="button" component="p">
-                    {"WindSpeed: " + Math.round(currently.wind_speed) + "m/s"}
+                    {t('WIND')} :  {Math.round(currently.wind_speed)} {t('m/s')}
                   </Typography>
                   <Typography variant="button" component="p">
-                    {"Feels like: " + Math.round(currently.feels_like)}&deg;C
+                    {t('Feels like')} : {Math.round(currently.feels_like)}&deg;C
                   </Typography>
                 </Grid>
               </Grid>

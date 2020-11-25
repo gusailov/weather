@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
 import HourlyCard from './HourlyCard';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -29,6 +30,7 @@ function HourlyCards(props) {
   const hourly = forecast.hourly;
   const classes = useStyles();
   const [value, setValue] = React.useState(hourly[0].dt);
+  const { t } = useTranslation();
 
 
   const handleChange = (event, newValue) => {
@@ -40,8 +42,9 @@ function HourlyCards(props) {
     <div className={classes.root}>
       <Paper elevation={2} style={{ padding: '1rem' }}>
         <Typography variant="button" component="p">
-          Hourly Forecast
-</Typography>
+          {t('Hourly Forecast')}
+
+        </Typography>
 
         <Tabs
           value={value}

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
 import DailyCard from './DailyCard';
-
+import { useTranslation } from 'react-i18next';
 
 function a11yProps(index) {
   return {
@@ -29,14 +29,14 @@ export default function DailyCards(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const { t } = useTranslation();
   return (
 
     <div className={classes.root}>
       <Paper elevation={2} style={{ padding: '1rem' }}>
         <Typography gutterBottom={true} variant="button" component="p">
-          Daily Forecast
-</Typography>
+          {t('Daily Forecast')}
+        </Typography>
         <Tabs
           value={value}
           onChange={handleChange}
