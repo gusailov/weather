@@ -22,7 +22,7 @@ function App() {
     longitude,
 
   } = usePosition();
-  const [coords, setCoords] = useState({ latitude: 46.480208, longitude: 30.732090 });
+  const [coords, setCoords] = useState({ latitude: 37.408794, longitude: - 122.020909 });
   const [lang, setLang] = useState("en");
   const [place, setPlace] = useState("place");
   const useStyles = makeStyles((theme) => ({
