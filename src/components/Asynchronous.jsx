@@ -13,6 +13,12 @@ export default function Asynchronous(props) {
     const loading = open && options.length === 0;
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
 
+    const queryDelay = (event) => {
+        console.log('ETV Before', event.target.value);
+        setTimeout(setQuery(event.target.value), 10000);
+        console.log('ETV After', event.target.value);
+    }
+
     const handleSelect = (address) => {
         setQuery(address);
         if (result.filter && address) {
@@ -27,17 +33,19 @@ export default function Asynchronous(props) {
     };
 
     React.useEffect(() => {
+        if (query) {
+            (async () => {
+                const response = await fetch(
+                    `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=20&dedupe=1`
+                );
+                const countries = await response.json();
+                seResult(countries);
+                if (countries.map) {
+                    setOptions(countries.map((item) => item.display_name));
+                }
+            })();
+        }
 
-        (async () => {
-            const response = await fetch(
-                `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=20&dedupe=1`
-            );
-            const countries = await response.json();
-            seResult(countries);
-            if (countries.map) {
-                setOptions(countries.map((item) => item.display_name));
-            }
-        })();
 
     }, [loading, query, LOCATIONIQ_API_KEY]);
 
@@ -82,7 +90,7 @@ export default function Asynchronous(props) {
                 </React.Fragment>
             }
             renderInput={(params) => (
-                <TextField  {...params} label="SEARCH" variant="outlined" onChange={(event) => setQuery(event.target.value)} />
+                <TextField  {...params} label="SEARCH" variant="outlined" onChange={(event) => queryDelay(event)} />
             )}
         />
 
