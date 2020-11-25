@@ -15,7 +15,10 @@ function CurrentlyCard(props) {
       <Grid container style={{ padding: '1rem' }} direction='column'  >
         <Grid item xs={12} >
           <Typography variant="button" component="p">
-            Current Weather in : {props.place}
+            Current Weather
+          </Typography>
+          <Typography variant="button" component="p">
+            {props.place}
           </Typography>
           <Typography variant="button" component="p">
             {date}
@@ -42,10 +45,10 @@ function CurrentlyCard(props) {
                     {currently.weather[0].description}
                   </Typography>
                   <Typography variant="button" component="p">
-                    {"WindSpeed -" + Math.round(currently.wind_speed) + "m/s"}
+                    {"WindSpeed: " + Math.round(currently.wind_speed) + "m/s"}
                   </Typography>
                   <Typography variant="button" component="p">
-                    {"Feels like -" + Math.round(currently.feels_like)}&deg;C
+                    {"Feels like: " + Math.round(currently.feels_like)}&deg;C
                   </Typography>
                 </Grid>
               </Grid>
