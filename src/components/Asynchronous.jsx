@@ -13,11 +13,7 @@ export default function Asynchronous(props) {
     const loading = open && options.length === 0;
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
 
-    const queryDelay = (event) => {
-        console.log('ETV Before', event.target.value);
-        setTimeout(setQuery(event.target.value), 10000);
-        console.log('ETV After', event.target.value);
-    }
+
 
     const handleSelect = (address) => {
         setQuery(address);
@@ -90,7 +86,7 @@ export default function Asynchronous(props) {
                 </React.Fragment>
             }
             renderInput={(params) => (
-                <TextField  {...params} label="SEARCH" variant="outlined" onChange={(event) => queryDelay(event)} />
+                <TextField  {...params} label="SEARCH" variant="outlined" onChange={(event) => setTimeout(setQuery, 5000, event.target.value)} />
             )}
         />
 
