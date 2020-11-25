@@ -3,6 +3,7 @@ import React from "react";
 import { TextField, CircularProgress, Fade } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
+import useDebounce from './use-debounce';
 
 
 export default function Asynchronous(props) {
@@ -12,7 +13,7 @@ export default function Asynchronous(props) {
     const [result, seResult] = React.useState([]);
     const loading = open && options.length === 0;
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
-
+    const debouncedQuery = useDebounce(query, 2500);
 
 
     const handleSelect = (address) => {
@@ -29,10 +30,11 @@ export default function Asynchronous(props) {
     };
 
     React.useEffect(() => {
-        if (query) {
+
+        if (debouncedQuery) {
             (async () => {
                 const response = await fetch(
-                    `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=20&dedupe=1`
+                    `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${debouncedQuery}&limit=20&dedupe=1`
                 );
                 const countries = await response.json();
                 seResult(countries);
@@ -43,7 +45,7 @@ export default function Asynchronous(props) {
         }
 
 
-    }, [loading, query, LOCATIONIQ_API_KEY]);
+    }, [loading, debouncedQuery, LOCATIONIQ_API_KEY]);
 
     React.useEffect(() => {
         if (!open) {
@@ -86,7 +88,7 @@ export default function Asynchronous(props) {
                 </React.Fragment>
             }
             renderInput={(params) => (
-                <TextField  {...params} label="SEARCH" variant="outlined" onChange={(event) => setTimeout(setQuery, 5000, event.target.value)} />
+                <TextField  {...params} label="SEARCH" variant="outlined" onChange={event => setQuery(event.target.value)} />
             )}
         />
 
