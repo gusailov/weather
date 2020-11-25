@@ -12,7 +12,7 @@ function CurrentlyCard(props) {
 
   return (
     <Paper elevation={2} >
-      <Grid container direction='column' spacing={2} >
+      <Grid container style={{ padding: '1rem' }} direction='column'  >
         <Grid item xs={12} >
           <Typography variant="button" component="p">
             Current Weather in : {props.place}

@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     color: 'black',
+
   },
 }));
 
@@ -38,7 +39,7 @@ function HourlyCard(props) {
 
       </Grid>
       <Grid item  >
-        {"WindSpeed -" + Math.round(forecast.wind_speed) + "m/s"}
+        {"WindSpeed :" + Math.round(forecast.wind_speed) + "m/s"}
       </Grid>
       <Grid item  >
         <OpacityIcon />{+ (forecast.rain ? forecast.rain['1h'] : "0") + " mm"}

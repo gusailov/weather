@@ -34,10 +34,10 @@ function DailyCard(props) {
         {dateFormat(forecast.dt, lang)}
       </Grid>
       <Grid item  >
-        Morning - {Math.round(forecast.temp.morn) + "℃"}
+        Morning : {Math.round(forecast.temp.morn) + "℃"}
       </Grid>
       <Grid item  >
-        Evening - {Math.round(forecast.temp.eve) + "℃"}
+        Evening : {Math.round(forecast.temp.eve) + "℃"}
       </Grid>
 
     </Grid>

@@ -17,8 +17,6 @@ export default function TransitionsModal() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
-
-
     const handleClose = () => {
         setOpen(false);
     };

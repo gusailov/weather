@@ -33,7 +33,7 @@ export default function DailyCards(props) {
   return (
 
     <div className={classes.root}>
-      <Paper elevation={2} >
+      <Paper elevation={2} style={{ padding: '1rem' }}>
         <Typography gutterBottom={true} variant="button" component="p">
           Daily Forecast
 </Typography>

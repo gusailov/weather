@@ -38,7 +38,7 @@ function HourlyCards(props) {
   return (
 
     <div className={classes.root}>
-      <Paper elevation={2} >
+      <Paper elevation={2} style={{ padding: '1rem' }}>
         <Typography variant="button" component="p">
           Hourly Forecast
 </Typography>
@@ -51,6 +51,7 @@ function HourlyCards(props) {
           variant="scrollable"
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
+
           classes={{
             indicator: classes.indicator,
 
