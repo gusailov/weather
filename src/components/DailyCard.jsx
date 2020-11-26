@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme) => ({
   root: {
     color: 'black',
+    alignItems: 'center'
   },
 }));
 function DailyCard(props) {
@@ -32,7 +33,8 @@ function DailyCard(props) {
         {forecast.weather[0].description}
       </Grid>
       <Grid item  >
-        <p>{Math.round(forecast.temp.day) + "℃"}</p>
+        <div>{Math.round(forecast.temp.day) + "℃"}</div></Grid>
+      <Grid item  >
         {dateFormat(forecast.dt, lang)}
       </Grid>
       <Grid item  >
