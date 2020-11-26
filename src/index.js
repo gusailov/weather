@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import "./i18n";
 import * as serviceWorker from "./serviceWorker";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 //import "slick-carousel/slick/slick-theme.css";
 
