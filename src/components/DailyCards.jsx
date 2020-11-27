@@ -1,16 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
+import { Typography, Paper } from '@material-ui/core';
 import DailyCard from './DailyCard';
 import { useTranslation } from 'react-i18next';
 import Slider from "react-slick";
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,10 +60,7 @@ export default function DailyCards(props) {
   const { forecast, lang } = props;
   const daily = forecast.daily;
   const classes = useStyles();
-  const [value, setValue] = React.useState(daily[0].dt);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
   const { t } = useTranslation();
   return (
 

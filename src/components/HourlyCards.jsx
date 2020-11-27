@@ -1,17 +1,9 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
+import { Typography, Paper } from '@material-ui/core';
 import HourlyCard from './HourlyCard';
 import { useTranslation } from 'react-i18next';
-
-
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
+import Slider from "react-slick";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,17 +17,57 @@ const useStyles = makeStyles((theme) => ({
     color: 'red',
   },
 }));
+const settings = {
+  arrows: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 6,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 6,
+        slidesToScroll: 1,
+
+
+      }
+    },
+    {
+      breakpoint: 830,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
 function HourlyCards(props) {
   const { forecast, lang } = props;
   const hourly = forecast.hourly;
   const classes = useStyles();
-  const [value, setValue] = React.useState(hourly[0].dt);
+
   const { t } = useTranslation();
 
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
 
   return (
 
@@ -46,30 +78,12 @@ function HourlyCards(props) {
 
         </Typography>
 
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto tabs example"
 
-          classes={{
-            indicator: classes.indicator,
-
-          }}
-        >
+        <Slider {...settings}>
           {hourly.map((item) =>
+            < HourlyCard lang={lang} forecast={item} index={item.dt} />)}
+        </Slider>
 
-            <Tab disabled key={item.dt} value={item.dt} label=
-              {< HourlyCard lang={lang} forecast={item} index={item.dt} />}
-
-              {...a11yProps(0)}
-            />
-          )}
-
-        </Tabs>
       </Paper>
     </div >
 

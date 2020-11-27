@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme) => ({
   root: {
     color: 'black',
+    alignItems: 'center'
 
   },
 }));

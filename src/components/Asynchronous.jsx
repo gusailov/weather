@@ -15,12 +15,11 @@ export default function Asynchronous(props) {
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
     const debouncedQuery = useDebounce(query, 2500);
 
-
     const handleSelect = (address) => {
+
         setQuery(address);
         if (result.filter && address) {
             const Asynchronous = result.filter((item) => item.display_name === address)
-            console.log('Asynchronous CALL result', Asynchronous[0])
 
             const latitude = result.filter((item) => item.display_name === address)[0].lat;
             const longitude = result.filter((item) => item.display_name === address)[0].lon;
