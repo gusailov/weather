@@ -4,6 +4,7 @@ import { Typography, Paper } from '@material-ui/core';
 import HourlyCard from './HourlyCard';
 import { useTranslation } from 'react-i18next';
 import Slider from "react-slick";
+import { SampleNextArrow, SamplePrevArrow } from "./Arrows";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,12 +19,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const settings = {
-  arrows: false,
+
   infinite: false,
   speed: 500,
   slidesToShow: 6,
   slidesToScroll: 1,
   initialSlide: 0,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+
   responsive: [
     {
       breakpoint: 1024,
@@ -39,7 +43,7 @@ const settings = {
       settings: {
         slidesToShow: 4,
         slidesToScroll: 1,
-
+        arrows: false,
       }
     },
     {
@@ -81,7 +85,7 @@ function HourlyCards(props) {
 
         <Slider {...settings}>
           {hourly.map((item) =>
-            < HourlyCard lang={lang} forecast={item} index={item.dt} />)}
+            < HourlyCard lang={lang} forecast={item} key={item.dt} />)}
         </Slider>
 
       </Paper>

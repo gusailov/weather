@@ -73,7 +73,7 @@ export default function DailyCards(props) {
         <Slider {...settings}>
           {daily.map((item) =>
 
-            < DailyCard lang={lang} value={item.dt} forecast={item} index={item.dt} />
+            < DailyCard lang={lang} value={item.dt} forecast={item} key={item.dt} />
 
 
           )}
