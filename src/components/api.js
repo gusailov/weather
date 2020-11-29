@@ -8,17 +8,22 @@ export const getForecast = (lat, lon, lang) => {
   );
 };
 
-const OPEN_CAGE_GEOCODING_API_KEY =
-  process.env.REACT_APP_OPEN_CAGE_GEOCODING_API_KEY;
+const HERE_API_KEY = process.env.REACT_APP_HERE_API_KEY;
 export const getPlaceByCoords = (lat, lon, lang) => {
   return axios.get(
-    `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${OPEN_CAGE_GEOCODING_API_KEY}&language=${lang}&pretty=1`
+    // `https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?prox=${lat}%2C${lon}%2C250&mode=retrieveAddresses&maxresults=1&language=${lang}&&apiKey=${HERE_API_KEY}`
+    `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${lon}&lang=${lang}&apiKey=${HERE_API_KEY}`
   );
 };
 
-const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
-export const getCoordsByPlace = (query) => {
+export const getCoordsByPlace = (query, lang) => {
   return axios.get(
-    `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${query}&limit=10`
+    `https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?apiKey=AClf4N5ptTRnzG-jQmZUktrIeczLhLoimWUuvBh6jSw&query=${query}&language=${lang}&maxresults=20`
+  );
+};
+
+export const getPlaceById = (id, lang) => {
+  return axios.get(
+    `https://geocoder.ls.hereapi.com/6.2/geocode.json?locationid=${id}&jsonattributes=1&gen=9&lang=${lang}&apiKey=${HERE_API_KEY}`
   );
 };

@@ -5,7 +5,7 @@ import Switchlang from "./Switchlang";
 import Spinner from './Spinner'
 import { Grid, Container, Divider } from "@material-ui/core";
 import { Context } from "./Context";
-import { getForecast, getPlaceByCoords } from './api';
+import { getForecast, getPlaceByCoords, getPlaceById } from './api';
 import Asynchronous from "./Asynchronous";
 import { usePosition } from 'use-position';
 import HourlyCards from "./HourlyCards";
@@ -38,15 +38,24 @@ function App() {
   console.log('COORDS', coords)
 
   useEffect(() => {
-    if (latitude && longitude) {
+    if (!latitude || !longitude) {
+      return
+    } else {
       let pos = { latitude, longitude }
       setCoords(pos);
     }
 
   }, [latitude, longitude]);
 
-  const searchPosition = (coords) => {
-    setCoords(coords);
+  const searchPosition = (result, lang) => {
+    getPlaceById(result.locationId, lang).then((res) => {
+      const [place] = [...res.data.response.view];
+      const [result] = [...place.result];
+      setCoords(result.location.displayPosition);
+
+    }
+    )
+
   }
 
 
@@ -61,14 +70,15 @@ function App() {
             setError(error);
           }
         );
-    }
-
-    if (coords.latitude && coords.longitude) {
-      getPlaceByCoords(coords.latitude, coords.longitude, lang).then((res) => { setPlace(res.data.results[0].formatted) }
+      getPlaceByCoords(coords.latitude, coords.longitude, lang).then((res) => {
+        const [place] = [...res.data.items];
+        setPlace(place.address.label)
+      }
       );
     }
+
     i18n.changeLanguage(lang)
-  }, [coords, lang, i18n])
+  }, [coords, lang, i18n, place])
 
 
 
@@ -97,7 +107,7 @@ function App() {
                   <Switchlang />
                 </Grid>
                 <Grid item xs={7} >
-                  <Asynchronous searchPosition={searchPosition} />
+                  <Asynchronous searchPosition={searchPosition} lang={lang} />
                 </Grid>
               </Grid>
             </Grid>

@@ -1,9 +1,9 @@
-import fetch from "cross-fetch";
 import React from "react";
 import { TextField, CircularProgress, Fade } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import useDebounce from './use-debounce';
+import { getCoordsByPlace } from './api';
 
 
 export default function Asynchronous(props) {
@@ -16,16 +16,10 @@ export default function Asynchronous(props) {
     const debouncedQuery = useDebounce(query, 500);
 
     const handleSelect = (address) => {
-        console.log('address', address);
         setQuery(address);
         if (result.filter && address) {
-
             const Asynchronous = result.filter((item) => item.label === address)
-            console.log('Asynchronous', Asynchronous);
-            //const latitude = result.filter((item) => item.display_name === address)[0].lat;
-            //const longitude = result.filter((item) => item.display_name === address)[0].lon;
-            // let pos = { latitude, longitude }
-            //props.searchPosition(pos, Asynchronous[0].display_place)
+            props.searchPosition(...Asynchronous)
         }
     };
 
@@ -33,10 +27,8 @@ export default function Asynchronous(props) {
 
         if (debouncedQuery) {
             (async () => {
-                const response = await fetch(
-                    `https://autocomplete.geocoder.ls.hereapi.com/6.2/suggest.json?apiKey=AClf4N5ptTRnzG-jQmZUktrIeczLhLoimWUuvBh6jSw&query=${debouncedQuery}&language=uk&maxresults=20`
-                );
-                const countr = await response.json();
+                const response = await getCoordsByPlace(debouncedQuery, props.lang)
+                const countr = await response.data;
                 const countries = await countr.suggestions;
                 seResult(countries);
                 if (countries.map) {
@@ -46,7 +38,7 @@ export default function Asynchronous(props) {
         }
 
 
-    }, [loading, debouncedQuery, LOCATIONIQ_API_KEY]);
+    }, [loading, debouncedQuery, LOCATIONIQ_API_KEY, props.lang]);
 
     React.useEffect(() => {
         if (!open) {
