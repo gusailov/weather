@@ -6,9 +6,11 @@ import OpacityIcon from '@material-ui/icons/Opacity';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     color: 'black',
+    alignItems: 'center'
 
   },
 }));

@@ -1,15 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Tab, Tabs, Typography, Paper } from '@material-ui/core';
+import { Typography, Paper } from '@material-ui/core';
 import DailyCard from './DailyCard';
 import { useTranslation } from 'react-i18next';
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
+import Slider from "react-slick";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,15 +14,53 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
   },
 }));
+const settings = {
+  arrows: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 8,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 6,
+        slidesToScroll: 1,
 
+
+      }
+    },
+    {
+      breakpoint: 830,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
 export default function DailyCards(props) {
   const { forecast, lang } = props;
   const daily = forecast.daily;
   const classes = useStyles();
-  const [value, setValue] = React.useState(daily[0].dt);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
   const { t } = useTranslation();
   return (
 
@@ -37,26 +69,16 @@ export default function DailyCards(props) {
         <Typography gutterBottom={true} variant="button" component="p">
           {t('Daily Forecast')}
         </Typography>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="scrollable"
-          scrollButtons='desktop'
-          aria-label="scrollable auto tabs example"
-          classes={{
-            indicator: classes.indicator
-          }}
-        >
+
+        <Slider {...settings}>
           {daily.map((item) =>
-            <Tab disabled key={item.dt} value={item.dt} label=
-              {< DailyCard lang={lang} value={item.dt} forecast={item} index={item.dt} />}
-              {...a11yProps(0)} />
+
+            < DailyCard lang={lang} value={item.dt} forecast={item} key={item.dt} />
+
 
           )}
+        </Slider>
 
-        </Tabs>
       </Paper>
     </div >
   );

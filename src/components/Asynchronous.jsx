@@ -1,9 +1,9 @@
-import fetch from "cross-fetch";
 import React from "react";
 import { TextField, CircularProgress, Fade } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import useDebounce from './use-debounce';
+import { getCoordsByPlace } from './api';
 
 
 export default function Asynchronous(props) {
@@ -13,19 +13,13 @@ export default function Asynchronous(props) {
     const [result, seResult] = React.useState([]);
     const loading = open && options.length === 0;
     const LOCATIONIQ_API_KEY = process.env.REACT_APP_LOCATIONIQ_API_KEY;
-    const debouncedQuery = useDebounce(query, 2500);
-
+    const debouncedQuery = useDebounce(query, 500);
 
     const handleSelect = (address) => {
         setQuery(address);
         if (result.filter && address) {
-            const Asynchronous = result.filter((item) => item.display_name === address)
-            console.log('Asynchronous CALL result', Asynchronous[0])
-
-            const latitude = result.filter((item) => item.display_name === address)[0].lat;
-            const longitude = result.filter((item) => item.display_name === address)[0].lon;
-            let pos = { latitude, longitude }
-            props.searchPosition(pos, Asynchronous[0].display_place)
+            const Asynchronous = result.filter((item) => item.label === address)
+            props.searchPosition(...Asynchronous)
         }
     };
 
@@ -33,19 +27,18 @@ export default function Asynchronous(props) {
 
         if (debouncedQuery) {
             (async () => {
-                const response = await fetch(
-                    `https://api.locationiq.com/v1/autocomplete.php?key=${LOCATIONIQ_API_KEY}&q=${debouncedQuery}&limit=20&dedupe=1`
-                );
-                const countries = await response.json();
+                const response = await getCoordsByPlace(debouncedQuery, props.lang)
+                const countr = await response.data;
+                const countries = await countr.suggestions;
                 seResult(countries);
                 if (countries.map) {
-                    setOptions(countries.map((item) => item.display_name));
+                    setOptions(countries.map((item) => item.label));
                 }
             })();
         }
 
 
-    }, [loading, debouncedQuery, LOCATIONIQ_API_KEY]);
+    }, [loading, debouncedQuery, LOCATIONIQ_API_KEY, props.lang]);
 
     React.useEffect(() => {
         if (!open) {
